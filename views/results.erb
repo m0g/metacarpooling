@@ -1,3 +1,9 @@
-<%= erb :header %>
-  <h1><%= test %></h1>
-<%= erb :footer %>
+<div class="container-fluid">
+  <% results.each do |result| %>
+    <div class="row-fluid">
+      <div class="span6 offset3">
+        <%= [result.name, result.phone].join ' ' %>
+      </div>
+    </div>
+  <% end %>
+</div>
