@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'open-uri'
 require 'nokogiri'
+require "addressable/uri"
 
 require_relative 'lib/result.rb'
 require_relative 'lib/search.rb'

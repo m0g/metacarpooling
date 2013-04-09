@@ -1,7 +1,7 @@
 class Result
-  def initialize name, phone
-    @name = name
-    @phone = phone
+  def initialize hash
+    @name = hash[:name]
+    @phone = hash[:phone]
   end
 
   def name
