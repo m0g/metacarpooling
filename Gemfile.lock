@@ -3,6 +3,7 @@ GEM
   specs:
     daemons (1.1.9)
     eventmachine (1.0.3)
+    nokogiri (1.5.9)
     rack (1.5.2)
     rack-protection (1.5.0)
       rack
@@ -22,6 +23,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  nokogiri
   shotgun
   sinatra
   thin
