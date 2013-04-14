@@ -6,6 +6,7 @@ class Result
     @booking = hash[:booking] if hash.has_key? :booking
     @service = hash[:service]
     @link = hash[:link]
+    @date = hash[:date]
   end
 
   def name
@@ -26,5 +27,9 @@ class Result
   
   def link
     @link
+  end
+
+  def date
+    @date
   end
 end

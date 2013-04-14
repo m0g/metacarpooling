@@ -20,11 +20,21 @@ class CovoiturageFr < Search
     booking = false
     booking = true if trip.at_css('span.with_booking')
 
+    if trip.css('div.one-trip-action a').empty?
+      link = ''
+    else
+      link = [
+        'http://covoiturage.fr',
+        trip.css('div.one-trip-action a').first['href'].delete("\n")
+      ].join ''
+    end
+
     Result.new(
       name: trip.css('a.displayname').text.delete("\n"),
       phone: trip.css('span.price span').text.delete("\n"),
+      date: trip.css('span.date').first.text,
       service: 'covoiturage.fr',
-      link: trip.css('a').href.delete("\n"),
+      link: link,
       booking: booking
     )
   end

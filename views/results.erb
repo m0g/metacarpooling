@@ -1,7 +1,13 @@
 <div class="container-fluid">
   <div class="row-fluid">
     <div class="span6 offset3">
-      <h1>Results</h1>
+      <h1>
+        <%= search[:from][:city] %>
+        to&nbsp;<%= search[:to][:city] %>
+      </h1>
+      <h2>
+        on&nbsp;the&nbsp;<%= search[:when][:date] %>
+      </h2>
     </div>
   </div>
 
@@ -9,8 +15,10 @@
     <div class="row-fluid">
       <div class="span6 offset3 well">
         <%= [result.name, result.phone].join ' ' %>
+        <%= result.date %>
         <%= result.booking %>
         <%= result.service %>
+        <a href="<%= result.link %>" target="_blank">Go to the link</a>
       </div>
     </div>
   <% end %>

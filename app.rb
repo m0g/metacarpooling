@@ -14,7 +14,8 @@ end
 
 post '/' do
   @results = CovoiturageFr.new(params[:search]).process
-  erb :results, locals: { results: @results }
+  erb :results, locals: { results: @results, 
+                          search: params[:search] }
 end
 
 not_found do
