@@ -1,0 +1,9 @@
+countries:
+  france: France
+  germany: Germany
+
+index:
+  title: Looking for a ride?
+
+content:
+  country: Country

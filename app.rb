@@ -3,19 +3,27 @@ require 'open-uri'
 require 'nokogiri'
 require 'addressable/uri'
 require 'date'
+require 'json'
+require 'sinatra/r18n'
 
 require_relative 'lib/result.rb'
 require_relative 'lib/search.rb'
 require_relative 'lib/covoiturage_fr.rb'
 require_relative 'lib/mitfahrgelegenheit_de.rb'
 
+class Metacarpooling < Sinatra::Base
+  register Sinatra::R18n
+  set :root, File.dirname(__FILE__)
+end
+
 get '/' do
-  #raise MitfahrgelegenheitDe::get_countries.inspect
+  #raise MitfahrgelegenheitDe::get_country_id('france').inspect
   erb :index
 end
 
 post '/' do
-  @results = CovoiturageFr.new(params[:search]).process
+  #@results = CovoiturageFr.new(params[:search]).process
+  @results = MitfahrgelegenheitDe.new(params[:search]).process
   erb :results, locals: { results: @results,
                           search: params[:search] }
 end
