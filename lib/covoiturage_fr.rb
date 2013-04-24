@@ -1,6 +1,6 @@
 class CovoiturageFr < Search
   def get_city_id city
-    result = open("http://www.covoiturage.fr/api/ajax_getCityListAutoComplete.php?q=#{city.downcase}&limit=30").read
+    result = open("http://www.covoiturage.fr/api/ajax_getCityListAutoComplete.php?q=#{CGI::escape(city.downcase)}&limit=30").read
     result.split(/\n/).first.split('|')[1] unless result.empty?
   end
 
@@ -30,8 +30,8 @@ class CovoiturageFr < Search
     end
 
     Result.new(
-      name: trip.css('a.displayname').text.delete("\n"),
-      phone: trip.css('span.price span').text.delete("\n"),
+      username: trip.css('a.displayname').text.delete("\n"),
+      price: trip.css('span.price span').text.delete("\n"),
       date: trip.css('span.date').first.text,
       service: 'covoiturage.fr',
       link: link,

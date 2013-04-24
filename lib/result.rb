@@ -1,35 +1,19 @@
 class Result
+  VARIABLES = [ :username, :price, :booking, :service, :link, :date ]
+
   def initialize hash
-    @name = hash[:name]
-    @phone = hash[:phone]
-    @booking = false
-    @booking = hash[:booking] if hash.has_key? :booking
-    @service = hash[:service]
-    @link = hash[:link]
-    @date = hash[:date]
+    VARIABLES.each do |variable|
+      if hash.has_key? variable
+        instance_variable_set "@#{variable}", hash[variable]
+      else
+        instance_variable_set "@#{variable}", false
+      end
+    end
   end
 
-  def name
-    @name
-  end
-
-  def phone
-    @phone
-  end
-
-  def booking
-    @booking.to_s
-  end
-
-  def service
-    @service
-  end
-  
-  def link
-    @link
-  end
-
-  def date
-    @date
+  VARIABLES.each do |variable|
+    define_method variable do
+      instance_variable_get "@#{variable}"
+    end
   end
 end

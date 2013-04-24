@@ -17,13 +17,15 @@ class Metacarpooling < Sinatra::Base
 end
 
 get '/' do
-  #raise MitfahrgelegenheitDe::get_country_id('france').inspect
   erb :index
 end
 
 post '/' do
-  #@results = CovoiturageFr.new(params[:search]).process
-  @results = MitfahrgelegenheitDe.new(params[:search]).process
+  @results = [
+    CovoiturageFr.new(params[:search]).process,
+    MitfahrgelegenheitDe.new(params[:search]).process
+  ].flatten
+  #@results = MitfahrgelegenheitDe.new(params[:search]).process
   erb :results, locals: { results: @results,
                           search: params[:search] }
 end

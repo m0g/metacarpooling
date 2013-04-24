@@ -14,12 +14,21 @@
   <% results.each do |result| %>
     <div class="row-fluid">
       <div class="span6 offset3 well">
-        <%= [result.name, result.phone].join ' ' %>
-        <%= result.date %>
-        <%= result.booking %>
-        <%= result.service %>
-        <a href="<%= result.link %>" target="_blank">Go to the link</a>
+        <div class="row-fluid">
+          <div class="span3"><%= result.username %></div>
+          <div class="span4"><%= result.date %></div>
+          <div class="span5">
+            <a href="<%= result.link %>" target="_blank" class="pull-right">
+              See on <%= result.service %>
+            </a>
+          </div>
+        </div>
+        <div class="row-fluid">
+          <div class="span4"><b>Booking system: </b><%= result.booking %></div>
+          <div class="span2 pull-right"><%= result.price %></div>
+        </div>
       </div>
     </div>
   <% end %>
+
 </div>

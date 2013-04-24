@@ -58,9 +58,39 @@ class MitfahrgelegenheitDe < Search
     ].join ''
   end
 
+  def result trip
+    if trip.at_css('td.column-8 span.sprite_icons-icon_table_booking')
+      booking = true
+    else
+      booking = false
+    end
+
+    link = [
+      'http://mitfahrgelegenheit.de',
+      trip.css('td.column-1 a').first['href']
+    ]. join ''
+
+    Result.new(
+      username: 'Unknown',
+      price: trip.css('td.column-6').text,
+      date: trip.css('td.column-5').text,
+      service: 'Mitfahrgelegenheit.de',
+      link: link,
+      booking: booking
+    )
+  end
+
   def process
     html = Nokogiri::HTML(open(query))
-    raise html.inspect
+    html.css('table.lift_list tr.link_hover').map do |trip|
+      if not trip.at_css('td.column-8 span.sprite_icons-icon_table_booking') and @booking != 'yes'
+        result trip
+      elsif trip.at_css('td.column-8 span.sprite_icons-icon_table_booking') and @booking != 'no'
+        result trip
+      else
+        nil
+      end
+    end.compact
   end
 
 end
