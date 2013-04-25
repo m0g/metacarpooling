@@ -16,7 +16,19 @@ class Metacarpooling < Sinatra::Base
   set :root, File.dirname(__FILE__)
 end
 
+enable :sessions
+
 get '/' do
+  if session[:locale]
+    redirect "/#{session[:locale]}/"
+  else
+    redirect "/en/"
+  end
+end
+
+get '/:locale/' do
+  session[:locale] = params[:locale] if params[:locale]
+
   unless params.has_key? 'search'
     erb :index
   else
@@ -28,20 +40,6 @@ get '/' do
                             search: params[:search] }
   end
 end
-
-#get '/' do
-#  erb :index
-#end
-
-#post '/' do
-#  @results = [
-#    CovoiturageFr.new(params[:search]).process,
-#    MitfahrgelegenheitDe.new(params[:search]).process
-#  ].flatten
-#  #@results = MitfahrgelegenheitDe.new(params[:search]).process
-#  erb :results, locals: { results: @results,
-#                          search: params[:search] }
-#end
 
 not_found do
   status 404

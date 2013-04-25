@@ -46,7 +46,7 @@ class MitfahrgelegenheitDe < Search
       country_to: @to_country_id,
       city_from: get_city_id(@from_country_id, @from_city),
       city_to: get_city_id(@to_country_id, @to_city),
-      radius_from: 0, radius_to: 0,
+      radius_from: @from_radius, radius_to: @to_radius,
       date: 'date', tolerance: @when_margin,
       day: @when_date.strftime('%d'),
       month: @when_date.strftime('%m'),
@@ -58,25 +58,29 @@ class MitfahrgelegenheitDe < Search
     ].join ''
   end
 
-  def result trip
+  def booking trip
     if trip.at_css('td.column-8 span.sprite_icons-icon_table_booking')
-      booking = true
+      true
     else
-      booking = false
+      false
     end
+  end
 
+  def link trip
     link = [
       'http://mitfahrgelegenheit.de',
       trip.css('td.column-1 a').first['href']
     ]. join ''
+  end
 
+  def result trip
     Result.new(
       username: 'Unknown',
       price: trip.css('td.column-6').text,
-      date: trip.css('td.column-5').text,
+      date: [trip.css('td.column-4').text, trip.css('td.column-5').text].join(''),
       service: 'Mitfahrgelegenheit.de',
-      link: link,
-      booking: booking
+      link: link(trip),
+      booking: booking(trip)
     )
   end
 

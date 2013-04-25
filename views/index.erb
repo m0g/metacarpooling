@@ -7,46 +7,61 @@
    <div class="row-fluid">
     <div class="span6 offset3 well">
       <form id="search-form" action="" method="get">
-        <p>
-          <span>From: </span>
-          <select name="search[from][country]">
+        <div class="row-fluid">
+          <span class="span2"><%=t.content.from %>: </span>
+          <select name="search[from][country]" class="span3">
             <option value=""><%=t.content.country %></option>
             <option value="france"><%=t.countries.france %></option>
             <option value="germany"><%=t.countries.germany %></option>
           </select>
-          <input type="text" name="search[from][city]" placeholder="City" />
-        </p>
-        <p>
-          <span>To: </span>
-          <select name="search[to][country]">
-            <option value=""><%=t.content.country %></option>
-            <option value="france"><%=t.countries.france %></option>
-            <option value="germany"><%=t.countries.germany %></option>
-          </select>
-          <input type="text" name="search[to][city]" placeholder="City" />
-        </p>
-        <p>
-        <input id="when-date" type="text" placeholder="Date" 
-               name="search[when][date]" />
-          <select name="search[when][margin]">
-            <option value="">Margin</option>
-            <option value="0">Fix</option>
-            <option value="1">+/-1 day</option>
-            <option value="2">+/-2 day</option>
-            <option value="3">+/-3 day</option>
-            <option value="4">+/-4 day</option>
-          </select>
-        </p>
+          <input type="text" name="search[from][city]" placeholder="City" class="span4" />
+          <select name="search[from][radius]" class="span3">
+            <option value="1"><%=t.content.radius %></option>
 
-        <p>
-          <span>Booking bullshit: </span>
-          <select id="booking" name="search[booking]">
-            <option value='both'>Both</option>
-            <option value='yes'>Sure</option>
-            <option value='no'>No way</option>
+            <% [1, 2, 5, 10, 20, 30, 40, 50].each do |i| %>
+              <option value="<%=i %>"><%=i %> km</option>
+            <% end %>
+
           </select>
-        </p>
-        <input class="btn btn-large" type="submit" value="submit" />
+        </div>
+        <div class="row-fluid">
+          <span class="span2"><%=t.content.to %>: </span>
+          <select name="search[to][country]" class="span3">
+            <option value=""><%=t.content.country %></option>
+            <option value="france"><%=t.countries.france %></option>
+            <option value="germany"><%=t.countries.germany %></option>
+          </select>
+          <input type="text" name="search[to][city]" placeholder="City" class="span4" />
+          <select name="search[to][radius]" class="span3">
+            <option value="1"><%=t.content.radius %></option>
+
+            <% [1, 2, 5, 10, 20, 30, 40, 50].each do |i| %>
+              <option value="<%=i %>"><%=i %> km</option>
+            <% end %>
+
+          </select>
+        </div>
+        <div class="row-fluid">
+          <input id="when-date" type="text" placeholder="Date"
+                 name="search[when][date]" class="span5 offset2"/>
+          <select name="search[when][margin]" class="span5">
+            <option value=""><%=t.content.margin %></option>
+            <option value="0"><%=t.content.fix %></option>
+            <option value="1">+/-1 <%=t.content.day %></option>
+            <option value="2">+/-2 <%=t.content.days %></option>
+            <option value="3">+/-3 <%=t.content.days %></option>
+            <option value="4">+/-4 <%=t.content.days %></option>
+          </select>
+        </div>
+        <div class="row-fluid">
+          <span class="span5 offset2"><%=t.content.booking_bullshit %>: </span>
+          <select id="booking" name="search[booking]" class="span5">
+            <option value='both'><%=t.content.both %></option>
+            <option value='yes'><%=t.content.sure %></option>
+            <option value='no'><%=t.content.no_way %></option>
+          </select>
+        </div>
+        <input class="btn btn-large" type="submit" value="<%=t.content.search %>" />
       </form>
     </div>
   </div>

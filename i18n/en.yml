@@ -7,3 +7,15 @@ index:
 
 content:
   country: Country
+  radius: Radius
+  from: From
+  to: To
+  margin: Margin
+  fix: Fix
+  day: Day
+  days: Days
+  booking_bullshit: Booking bullshit
+  both: Both
+  sure: Sure
+  no_way: No way
+  search: Search
