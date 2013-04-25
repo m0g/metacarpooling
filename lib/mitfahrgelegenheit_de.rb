@@ -47,7 +47,7 @@ class MitfahrgelegenheitDe < Search
       city_from: get_city_id(@from_country_id, @from_city),
       city_to: get_city_id(@to_country_id, @to_city),
       radius_from: 0, radius_to: 0,
-      date: 'date', tolerance: 4,
+      date: 'date', tolerance: @when_margin,
       day: @when_date.strftime('%d'),
       month: @when_date.strftime('%m'),
       year: @when_date.strftime('%Y')
@@ -81,11 +81,17 @@ class MitfahrgelegenheitDe < Search
   end
 
   def process
+    booking_el = 'td.column-8 span.sprite_icons-icon_table_booking'
+    bahn_el = 'td.column-8 span.sprite_icons-bahn_small'
+    bus_el = 'td.column-8 img[title="Kooperationspartner"]'
+
     html = Nokogiri::HTML(open(query))
     html.css('table.lift_list tr.link_hover').map do |trip|
-      if not trip.at_css('td.column-8 span.sprite_icons-icon_table_booking') and @booking != 'yes'
+      if trip.at_css bahn_el, bus_el
+        nil
+      elsif not trip.at_css(booking_el) and @booking != 'yes'
         result trip
-      elsif trip.at_css('td.column-8 span.sprite_icons-icon_table_booking') and @booking != 'no'
+      elsif trip.at_css(booking_el) and @booking != 'no'
         result trip
       else
         nil

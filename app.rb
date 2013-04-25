@@ -17,18 +17,31 @@ class Metacarpooling < Sinatra::Base
 end
 
 get '/' do
-  erb :index
+  unless params.has_key? 'search'
+    erb :index
+  else
+    @results = [
+      CovoiturageFr.new(params[:search]).process,
+      MitfahrgelegenheitDe.new(params[:search]).process
+    ].flatten
+    erb :results, locals: { results: @results,
+                            search: params[:search] }
+  end
 end
 
-post '/' do
-  @results = [
-    CovoiturageFr.new(params[:search]).process,
-    MitfahrgelegenheitDe.new(params[:search]).process
-  ].flatten
-  #@results = MitfahrgelegenheitDe.new(params[:search]).process
-  erb :results, locals: { results: @results,
-                          search: params[:search] }
-end
+#get '/' do
+#  erb :index
+#end
+
+#post '/' do
+#  @results = [
+#    CovoiturageFr.new(params[:search]).process,
+#    MitfahrgelegenheitDe.new(params[:search]).process
+#  ].flatten
+#  #@results = MitfahrgelegenheitDe.new(params[:search]).process
+#  erb :results, locals: { results: @results,
+#                          search: params[:search] }
+#end
 
 not_found do
   status 404
