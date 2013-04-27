@@ -19,3 +19,6 @@ content:
   sure: Sure
   no_way: No way
   search: Search
+
+engines:
+  mitfahrgelegenheit: carpooling.co.uk

@@ -1,5 +1,7 @@
 class Search
   def initialize search
+    @locale = R18n::I18n.new(R18n.get.locale.code, './i18n/')
+
     @from_country = search[:from][:country]
     @from_city = search[:from][:city]
     @from_radius = search[:from][:radius]

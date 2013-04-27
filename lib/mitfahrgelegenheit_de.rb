@@ -41,7 +41,7 @@ class MitfahrgelegenheitDe < Search
     @to_country_id = get_country_id @to_country
 
     uri = Addressable::URI.new
-    uri.query_values = {
+    query_values = {
       country_from: @from_country_id,
       country_to: @to_country_id,
       city_from: get_city_id(@from_country_id, @from_city),
@@ -52,8 +52,13 @@ class MitfahrgelegenheitDe < Search
       month: @when_date.strftime('%m'),
       year: @when_date.strftime('%Y')
     }
+
+    uri.query_values = query_values
+
     [
-      "http://www.mitfahrgelegenheit.de/searches/search_abroad?",
+      'http://www.',
+      service,
+      '/searches/search_abroad?',
       uri.query
     ].join ''
   end
@@ -66,9 +71,14 @@ class MitfahrgelegenheitDe < Search
     end
   end
 
+  def service
+    @locale.t.engines.mitfahrgelegenheit
+  end
+
   def link trip
     link = [
-      'http://mitfahrgelegenheit.de',
+      'http://www.',
+      service,
       trip.css('td.column-1 a').first['href']
     ]. join ''
   end
@@ -78,7 +88,7 @@ class MitfahrgelegenheitDe < Search
       username: 'Unknown',
       price: trip.css('td.column-6').text,
       date: [trip.css('td.column-4').text, trip.css('td.column-5').text].join(''),
-      service: 'Mitfahrgelegenheit.de',
+      service: Unicode::capitalize(service),
       link: link(trip),
       booking: booking(trip)
     )
