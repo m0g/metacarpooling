@@ -13,14 +13,55 @@ class BessermitfahrenDe < Search
   def get_city_id country, city
     country_city = [ city, country ].join ', '
 
-    open(city_query(country_city)).read
+    exotic_result = open(city_query(country_city)).read.split('new Array')
+    exotic_result[2].gsub(/[()']/, '').split(',')[0]
+  end
+
+  def post_params
+    {
+      from: get_city_id(@from_country, @from_city),
+      to: get_city_id(@to_country, @to_city),
+      tmp_from: @from_city,
+      tmp_to: @to_city,
+      people: 1,
+      date: @when_date.strftime('%d.%m.%Y')
+    }
+  end
+
+  def link trip
+    link = [
+      'http://www.bessermitfahren.de',
+      trip.first[1]
+    ]. join ''
+  end
+
+  def result trip
+    Result.new(
+      username: 'Unknown',
+      price: trip.css('span.price'),
+      date: [trip.css('span.date'),trip.css('span.time')].join(', '),
+      service: 'bessermitfahren.de',
+      link: link(trip),
+      booking: false
+    )
   end
 
   def process
-    raise get_city_id(@from_country, @from_city).inspect
+    uri = URI('http://www.bessermitfahren.de/')
+    res = Net::HTTP.post_form(uri, post_params)
+    redirection = res.header['location']
+    cookie = res.response['set-cookie'].split('; ')[0]
 
-    #uri = URI('http://www.example.com/search.cgi')
-    #res = Net::HTTP.post_form(uri, 'q' => 'ruby', 'max' => '50')
-    #puts res.body
+    html = Nokogiri::HTML(open(redirection, "Cookie" => cookie))
+    html.css('#resultlist li a').map do |trip|
+      result trip
+    end
+    #uri_second = URI.parse redirection
+    #http = Net::HTTP.new(uri.host, uri.port)
+    #request = Net::HTTP::Post.new(uri.request_uri)
+    #request.set_form_data(post_params)
+    #res_second = Net::HTTP.post_form(uri_second, post_params)
+    #response = http.request(request)
+    #raise response.inspect
   end
 end

@@ -30,7 +30,7 @@ class MitfahrgelegenheitDe < Search
 
   def get_city_id country_id, city
     JSON.parse(open(
-      "http://www.mitfahrgelegenheit.de/lifts/getCities/#{country_id}"
+      "http://www.#{service}/lifts/getCities/#{country_id}"
     ).read).each do |el|
       return el[1] if el[0].downcase == city.downcase
     end
