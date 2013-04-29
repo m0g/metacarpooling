@@ -19,6 +19,9 @@ content:
   sure: Sure
   no_way: No way
   search: Search
+  seats_remaining: seats remaining
+  new_search: New search
+  unknown: Unknown
 
 engines:
   mitfahrgelegenheit: carpooling.co.uk

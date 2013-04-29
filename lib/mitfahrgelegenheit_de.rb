@@ -8,7 +8,7 @@ class MitfahrgelegenheitDe < Search
       { id: option['value'], name: option.text }
     end.to_json
 
-    File.open('data/countries.json', 'w') do |f|
+    File.open('data/mfg_countries_de.json', 'w') do |f|
       f.puts list_countries
     end
   end
@@ -17,7 +17,7 @@ class MitfahrgelegenheitDe < Search
     mfg_de = R18n::I18n.new('de', './i18n/')
     name = mfg_de.t.countries.send(name)
 
-    File.open('data/countries.json', 'r') do |f|
+    File.open('data/mfg_countries_de.json', 'r') do |f|
       JSON.parse(f.gets).each do |country|
         if country['name'].downcase == name.downcase
           return country['id']
@@ -85,10 +85,12 @@ class MitfahrgelegenheitDe < Search
 
   def result trip
     Result.new(
-      username: 'Unknown',
       price: trip.css('td.column-6').text,
       date: [trip.css('td.column-4').text, trip.css('td.column-5').text].join(''),
       service: Unicode::capitalize(service),
+      places: trip.css('td.column-7').text.scan(/[0-9]/i).first.to_i,
+      from: trip.css('td.column-2').text.gsub(/\s\(.*\)/i, ''),
+      to: trip.css('td.column-3').text.gsub(/\s\(.*\)/i, ''),
       link: link(trip),
       booking: booking(trip)
     )
@@ -98,10 +100,11 @@ class MitfahrgelegenheitDe < Search
     booking_el = 'td.column-8 span.sprite_icons-icon_table_booking'
     bahn_el = 'td.column-8 span.sprite_icons-bahn_small'
     bus_el = 'td.column-8 img[title="Kooperationspartner"]'
+    bus_el_en = 'td.column-8 img[title="Cooperations partner"]'
 
     html = Nokogiri::HTML(open(query))
     html.css('table.lift_list tr.link_hover').map do |trip|
-      if trip.at_css bahn_el, bus_el
+      if trip.at_css bahn_el, bus_el, bus_el_en
         nil
       elsif not trip.at_css(booking_el) and @booking != 'yes'
         result trip

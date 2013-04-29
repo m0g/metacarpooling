@@ -10,9 +10,12 @@ require 'unicode'
 
 require_relative 'lib/result.rb'
 require_relative 'lib/search.rb'
+
+# Search engines
 require_relative 'lib/covoiturage_fr.rb'
 require_relative 'lib/mitfahrgelegenheit_de.rb'
 require_relative 'lib/bessermitfahren_de.rb'
+require_relative 'lib/mitfahrzentrale_de.rb'
 
 class Metacarpooling < Sinatra::Base
   register Sinatra::R18n
@@ -30,6 +33,7 @@ get '/' do
 end
 
 get '/:locale/' do
+  MitfahrzentraleDe::get_countries
   session[:locale] = params[:locale] if params[:locale]
 
   unless params.has_key? 'search'
@@ -38,8 +42,10 @@ get '/:locale/' do
     @results = [
       CovoiturageFr.new(params[:search]).process,
       BessermitfahrenDe.new(params[:search]).process,
+      MitfahrzentraleDe.new(params[:search]).process,
       MitfahrgelegenheitDe.new(params[:search]).process
     ].flatten
+
     erb :results, locals: { results: @results,
                             search: params[:search] }
   end

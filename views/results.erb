@@ -1,6 +1,11 @@
 <div class="container-fluid">
   <div class="row-fluid">
     <div class="span6 offset3">
+      <a href="/"><%=t.content.new_search %></a>
+    </div>
+  </div>
+  <div class="row-fluid">
+    <div class="span6 offset3">
       <h1>
         <%= search[:from][:city] %>
         to&nbsp;<%= search[:to][:city] %>
@@ -15,7 +20,18 @@
     <div class="row-fluid">
       <div class="span6 offset3 well">
         <div class="row-fluid">
-          <div class="span3"><%= result.username %></div>
+          <div class="span4">
+            <small><%=result.from %>&nbsp;->&nbsp;<%=result.to %></small>
+          </div>
+        </div>
+        <div class="row-fluid">
+          <div class="span3">
+            <% if result.username %>
+              <%= result.username %>
+            <% else %>
+              <%=t.content.unknown %>
+            <% end %>
+          </div>
           <div class="span4"><%= result.date %></div>
           <div class="span5">
             <a href="<%= result.link %>" target="_blank" class="pull-right">
@@ -25,7 +41,18 @@
         </div>
         <div class="row-fluid">
           <div class="span4"><b>Booking system: </b><%= result.booking %></div>
-          <div class="span2 pull-right"><%= result.price %></div>
+          <div class="span3">
+            <% if result.places %>
+              <%=result.places %>&nbsp;<%=t.content.seats_remaining %>
+            <% end %>
+          </div>
+          <div class="span2 pull-right">
+            <% if result.price %>
+              <%= result.price %>
+            <% else %>
+              ?€
+            <% end %>
+          </div>
         </div>
       </div>
     </div>

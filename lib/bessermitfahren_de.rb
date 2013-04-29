@@ -38,9 +38,15 @@ class BessermitfahrenDe < Search
   def result trip
     Result.new(
       username: 'Unknown',
-      price: trip.css('span.price'),
-      date: [trip.css('span.date'),trip.css('span.time')].join(', '),
+      price: trip.css('span.price').text,
+      date: [
+        trip.css('span.date').text,
+        trip.css('span.time').text
+      ].join(', '),
+      places: trip.css('span.people').text.scan(/[0-9]+/i).first.to_i,
       service: 'bessermitfahren.de',
+      from: trip.css('span.from'),
+      to: trip.css('span.to'),
       link: link(trip),
       booking: false
     )
@@ -56,12 +62,5 @@ class BessermitfahrenDe < Search
     html.css('#resultlist li a').map do |trip|
       result trip
     end
-    #uri_second = URI.parse redirection
-    #http = Net::HTTP.new(uri.host, uri.port)
-    #request = Net::HTTP::Post.new(uri.request_uri)
-    #request.set_form_data(post_params)
-    #res_second = Net::HTTP.post_form(uri_second, post_params)
-    #response = http.request(request)
-    #raise response.inspect
   end
 end

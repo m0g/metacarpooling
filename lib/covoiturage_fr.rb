@@ -39,12 +39,41 @@ class CovoiturageFr < Search
     end
   end
 
+  def places trip
+    if trip.at_css 'span.nbseats-booking-manual'
+      trip.css('span.nbseats-booking-manual').text.scan(/[0-9]+/i).first.to_i
+    elsif trip.at_css 'span.nbseats b'
+      trip.at_css('span.nbseats b').text.to_i
+    elsif trip.at_css 'span.nbseats-booking-auto b'
+      trip.css('span.nbseats-booking-auto b').text.to_i
+    elsif trip.at_css 'span.no-seat-available'
+      0
+    else
+      'NaN'
+    end
+  end
+
+  def from trip
+    if trip.at_css 'span.realfrom'
+      trip.css('span.realfrom').text
+    else
+      trip.css('div.one-trip-info h2 a').text.split(' → ').first
+    end
+  end
+
+  def to trip
+    trip.css('div.one-trip-info h2 a').text.split(' → ')[1]
+  end
+
   def result trip
     Result.new(
       username: trip.css('a.displayname').text.delete("\n"),
       price: trip.css('span.price span').text.delete("\n"),
       date: trip.css('span.date').first.text,
+      places: places(trip),
       service: 'covoiturage.fr',
+      from: from(trip),
+      to: to(trip),
       link: link(trip),
       booking: booking(trip)
     )
