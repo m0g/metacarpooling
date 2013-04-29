@@ -20,6 +20,10 @@ class CovoiturageFr < Search
     ["http://www.covoiturage.fr/recherche?", uri.query].join ''
   end
 
+  def service
+    @locale.engines.covoituragefr
+  end
+
   def booking trip
     if trip.at_css('span.with_booking')
       true
@@ -33,8 +37,12 @@ class CovoiturageFr < Search
       ''
     else
       [
-        'http://covoiturage.fr',
-        trip.css('div.one-trip-action a').first['href'].delete("\n")
+        'http://',
+        service,
+        trip.css('div.one-trip-action a').first['href']
+                                         .delete("\n")
+                                         .gsub('trajet',
+                                               @locale.t.other.trip.to_s)
       ].join ''
     end
   end
@@ -65,13 +73,31 @@ class CovoiturageFr < Search
     trip.css('div.one-trip-info h2 a').text.split(' → ')[1]
   end
 
+  def date trip
+    date_string, time_string = trip.css('span.date')[1].text.strip.split ' - '
+
+    if date_string.downcase == 'demain'
+      date_string = (Date.today + 1).strftime('%d %B')
+    else
+      date_string[0..8] = ''
+      day_string, month_string = date_string.split ' '
+      month_string = Date.month_to_english(month_string)
+      date_string = [ day_string, month_string ].join ' '
+    end
+
+    DateTime.strptime(
+      [ date_string, time_string ].join(' '),
+      '%d %B %Hh%M'
+    )
+  end
+
   def result trip
     Result.new(
       username: trip.css('a.displayname').text.delete("\n"),
       price: trip.css('span.price span').text.delete("\n"),
-      date: trip.css('span.date').first.text,
+      date: date(trip),
       places: places(trip),
-      service: 'covoiturage.fr',
+      service: service,
       from: from(trip),
       to: to(trip),
       link: link(trip),

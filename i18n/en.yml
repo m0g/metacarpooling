@@ -25,3 +25,7 @@ content:
 
 engines:
   mitfahrgelegenheit: carpooling.co.uk
+  covoituragefr: blablacar.de
+
+other:
+  trip: fahrt

@@ -10,6 +10,7 @@ require 'unicode'
 
 require_relative 'lib/result.rb'
 require_relative 'lib/search.rb'
+require_relative 'lib/dates_international.rb'
 
 # Search engines
 require_relative 'lib/covoiturage_fr.rb'

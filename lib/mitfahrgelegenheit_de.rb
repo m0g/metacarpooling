@@ -1,4 +1,6 @@
 class MitfahrgelegenheitDe < Search
+  DATE_FORMAT = { 'en' => '%d/%m/%y %I:%M %p', 'de' => '%d.%m.%y %H.%M Uhr' }
+
   def self.get_countries
     html = Nokogiri::HTML(open(
       'http://www.mitfahrgelegenheit.de/searches/search_abroad'
@@ -83,10 +85,25 @@ class MitfahrgelegenheitDe < Search
     ]. join ''
   end
 
+  def date trip
+    date_string = [
+      trip.css('td.column-4').text.split(',')[1],
+      trip.css('td.column-5').text
+    ].join(' ').strip
+    date_string[0] = ''
+
+    if trip.css('td.column-5').text.empty?
+      date_string << ' 00.00 Uhr' if @locale.get.locale.code == 'de'
+      date_string << ' 12:00 AM' if @locale.get.locale.code == 'en'
+    end
+
+    DateTime.strptime(date_string, DATE_FORMAT[@locale.get.locale.code])
+  end
+
   def result trip
     Result.new(
       price: trip.css('td.column-6').text,
-      date: [trip.css('td.column-4').text, trip.css('td.column-5').text].join(''),
+      date: date(trip),
       service: Unicode::capitalize(service),
       places: trip.css('td.column-7').text.scan(/[0-9]/i).first.to_i,
       from: trip.css('td.column-2').text.gsub(/\s\(.*\)/i, ''),

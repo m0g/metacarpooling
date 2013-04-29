@@ -35,14 +35,21 @@ class BessermitfahrenDe < Search
     ]. join ''
   end
 
+  def date trip
+    date_string = [
+      trip.css('span.date').text,
+      trip.css('span.time').text
+    ].join(' ')
+    date_string[0..3] = ''
+
+    DateTime.strptime date_string, '%d.%m.%y %H:%M Uhr'
+  end
+
   def result trip
     Result.new(
       username: 'Unknown',
       price: trip.css('span.price').text,
-      date: [
-        trip.css('span.date').text,
-        trip.css('span.time').text
-      ].join(', '),
+      date: date(trip),
       places: trip.css('span.people').text.scan(/[0-9]+/i).first.to_i,
       service: 'bessermitfahren.de',
       from: trip.css('span.from'),

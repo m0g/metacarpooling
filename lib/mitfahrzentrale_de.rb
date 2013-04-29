@@ -64,14 +64,22 @@ class MitfahrzentraleDe < Search
     ].join ''
   end
 
+  def date trip
+    date_string = trip.css('td:nth-child(2)').text
+    date_string[0..3] = ''
+    time_string = trip.css('td:nth-child(5)').text.gsub(/(Uhr|o\'clock)/i, '').strip
+
+    DateTime.strptime(
+      [ date_string, time_string ].join(' '),
+      '%d.%m.%Y %I:%M %p'
+    )
+  end
+
   def result trip
     Result.new(
       from: trip.css('td:nth-child(3)').text,
       to: trip.css('td:nth-child(4)').text,
-      date: [
-        trip.css('td:nth-child(2)').text,
-        trip.css('td:nth-child(5)').text
-      ].join(' '),
+      date: date(trip),
       booking: false,
       link: link(trip),
       service: service
