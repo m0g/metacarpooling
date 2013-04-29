@@ -25,7 +25,7 @@ content:
 
 engines:
   mitfahrgelegenheit: mitfahrgelegenheit.de
-  covoituragefr: blablacar.com
+  covoituragefr: blablacar.de
 
 other:
   trip: fahrt
