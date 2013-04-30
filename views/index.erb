@@ -9,12 +9,13 @@
       <form id="search-form" action="" method="get">
         <div class="row-fluid">
           <span class="span2"><%=t.content.from %>: </span>
-          <select name="search[from][country]" class="span3">
+          <select id="from-country" name="search[from][country]" class="span3">
             <option value=""><%=t.content.country %></option>
-            <option value="france"><%=t.countries.france %></option>
-            <option value="germany"><%=t.countries.germany %></option>
+            <option value="france" data-countrycode="fr"><%=t.countries.france %></option>
+            <option value="germany" data-countrycode="de"><%=t.countries.germany %></option>
           </select>
-          <input type="text" name="search[from][city]" placeholder="City" class="span4" />
+          <input type="text" id="from-city" name="search[from][city]"
+                 placeholder="City" class="span4" data-countrycode=""/>
           <select name="search[from][radius]" class="span3">
             <option value="1"><%=t.content.radius %></option>
 
@@ -26,12 +27,13 @@
         </div>
         <div class="row-fluid">
           <span class="span2"><%=t.content.to %>: </span>
-          <select name="search[to][country]" class="span3">
+          <select id="to-country" name="search[to][country]" class="span3">
             <option value=""><%=t.content.country %></option>
-            <option value="france"><%=t.countries.france %></option>
-            <option value="germany"><%=t.countries.germany %></option>
+            <option value="france" data-countrycode="fr"><%=t.countries.france %></option>
+            <option value="germany" data-countrycode="de"><%=t.countries.germany %></option>
           </select>
-          <input type="text" name="search[to][city]" placeholder="City" class="span4" />
+          <input type="text" id="to-city" name="search[to][city]"
+                 placeholder="City" class="span4" data-countrycode=""/>
           <select name="search[to][radius]" class="span3">
             <option value="1"><%=t.content.radius %></option>
 
