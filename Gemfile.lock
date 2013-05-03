@@ -18,6 +18,7 @@ GEM
     sinatra-r18n (1.1.4)
       r18n-core (= 1.1.4)
       sinatra (>= 1.3)
+    text (1.2.1)
     thin (1.5.1)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
@@ -34,5 +35,6 @@ DEPENDENCIES
   shotgun
   sinatra
   sinatra-r18n
+  text
   thin
   unicode

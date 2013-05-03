@@ -7,9 +7,11 @@ require 'date'
 require 'json'
 require 'sinatra/r18n'
 require 'unicode'
+require 'text'
 
 require_relative 'lib/result.rb'
 require_relative 'lib/search.rb'
+require_relative 'lib/super_search.rb'
 require_relative 'lib/dates_international.rb'
 
 # Search engines
@@ -28,6 +30,8 @@ enable :sessions
 get '/' do
   if session[:locale]
     redirect "/#{session[:locale]}/"
+  elsif not env['HTTP_ACCEPT_LANGUAGE'].empty?
+    redirect "/#{env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first}/"
   else
     redirect "/en/"
   end
@@ -40,13 +44,7 @@ get '/:locale/' do
   unless params.has_key? 'search'
     erb :index
   else
-    @results = [
-      CovoiturageFr.new(params[:search]).process,
-      BessermitfahrenDe.new(params[:search]).process,
-      MitfahrzentraleDe.new(params[:search]).process,
-      MitfahrgelegenheitDe.new(params[:search]).process
-    ].flatten
-
+    @results = SuperSearch.new(params[:search]).order_by_date
     erb :results, locals: { results: @results,
                             search: params[:search] }
   end

@@ -68,9 +68,14 @@
 
     },
 
+    disableCityInputs: function() {
+      if ($("#from-city").val().length == 0 || $("#to-city").val().length == 0)
+        $('#from-city, #to-city').attr('disabled', true);
+    },
+
     init: function() {
       this.events();
-      $('#from-city, #to-city').attr('disabled', true);
+      this.disableCityInputs();
       $("#when-date").datepicker({ dateFormat: "dd-mm-yy" });
     }
 

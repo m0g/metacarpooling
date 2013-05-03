@@ -21,7 +21,11 @@
       <ul class="dropdown-menu">
         <% r18n.available_locales.each do |locale| %>
           <% if locale.code != r18n.locale.code %>
-            <li><a href="/<%=locale.code %>/?<%=env['QUERY_STRING'] %>">
+            <% if env['QUERY_STRING'].empty? %>
+              <li><a href="/<%=locale.code %>/">
+            <% else %>
+              <li><a href="/<%=locale.code %>/?<%=env['QUERY_STRING'] %>">
+            <% end %>
               <img src="/img/flags/<%=locale.code %>.png" title="<%=locale.title %>"/>
             </a></li>
           <% end %>

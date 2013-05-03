@@ -6,21 +6,21 @@ index:
   title: Looking for a ride?
 
 content:
-  country: Country
-  radius: Radius
-  from: From
-  to: To
+  country: Land
+  radius: Umkreis
+  from: Von
+  to: Nach
   margin: Margin
   fix: Fix
-  day: Day
+  day: Tag
   days: Days
   booking_bullshit: Booking bullshit
   both: Both
   sure: Sure
-  no_way: No way
-  search: Search
+  no_way: Nein
+  search: Suche
   seats_remaining: seats remaining
-  new_search: New search
+  new_search: Neue Suche
   unknown: Unknown
 
 engines:

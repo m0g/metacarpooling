@@ -31,10 +31,12 @@ class MitfahrgelegenheitDe < Search
   end
 
   def get_city_id country_id, city
+    white = Text::WhiteSimilarity.new
+
     JSON.parse(open(
       "http://www.#{service}/lifts/getCities/#{country_id}"
     ).read).each do |el|
-      return el[1] if el[0].downcase == city.downcase
+      return el[1] if white.similarity(el[0].downcase, city.downcase) > 0.8
     end
   end
 
