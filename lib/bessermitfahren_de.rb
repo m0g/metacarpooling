@@ -31,18 +31,21 @@ class BessermitfahrenDe < Search
   def link trip
     link = [
       'http://www.bessermitfahren.de',
-      trip.first[1]
+      trip['href']
     ]. join ''
   end
 
   def date trip
     date_string = [
-      trip.css('span.date').text,
+      trip.css('span.date').text[-8..-1],
       trip.css('span.time').text
     ].join(' ')
-    date_string[0..3] = ''
 
-    DateTime.strptime date_string, '%d.%m.%y %H:%M Uhr'
+    begin
+      DateTime.strptime date_string, '%d.%m.%y %H:%M Uhr'
+    rescue
+      raise date_string.inspect
+    end
   end
 
   def result trip

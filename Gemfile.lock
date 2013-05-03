@@ -7,6 +7,8 @@ GEM
     nokogiri (1.5.9)
     r18n-core (1.1.4)
     rack (1.5.2)
+    rack-flash3 (1.0.3)
+      rack
     rack-protection (1.5.0)
       rack
     shotgun (0.9)
@@ -32,6 +34,7 @@ PLATFORMS
 DEPENDENCIES
   addressable
   nokogiri
+  rack-flash3
   shotgun
   sinatra
   sinatra-r18n

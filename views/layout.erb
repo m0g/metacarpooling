@@ -13,26 +13,51 @@
     <link href="/css/app.css" rel="stylesheet" />
   </head>
   <body>
-    <div id="language-switcher" class="btn-group">
-      <a href="#" class="btn dropdown-toggle" data-toggle="dropdown">
-        <img src="/img/flags/<%=r18n.locale.code %>.png" title="<%=r18n.locale.title %>"/>
-        <span class="caret"></span>
-      </a>
-      <ul class="dropdown-menu">
-        <% r18n.available_locales.each do |locale| %>
-          <% if locale.code != r18n.locale.code %>
-            <% if env['QUERY_STRING'].empty? %>
-              <li><a href="/<%=locale.code %>/">
-            <% else %>
-              <li><a href="/<%=locale.code %>/?<%=env['QUERY_STRING'] %>">
-            <% end %>
-              <img src="/img/flags/<%=locale.code %>.png" title="<%=locale.title %>"/>
-            </a></li>
-          <% end %>
-        <% end %>
-      </ul>
+    <div class="container-fluid" id="main-content">
+
+      <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+          <a class="brand" href="/">Metacarpooling.com</a>
+          <ul class="nav">
+            <li><a href="#">Link</a></li>
+          </ul>
+          <div id="language-switcher" class="btn-group pull-right">
+            <a href="#" class="btn dropdown-toggle" data-toggle="dropdown">
+              <img src="/img/flags/<%=r18n.locale.code %>.png" title="<%=r18n.locale.title %>"/>
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <% r18n.available_locales.each do |locale| %>
+                <% if locale.code != r18n.locale.code %>
+                  <% if env['QUERY_STRING'].empty? %>
+                    <li><a href="/<%=locale.code %>/">
+                  <% else %>
+                    <li><a href="/<%=locale.code %>/?<%=env['QUERY_STRING'] %>">
+                  <% end %>
+                    <img src="/img/flags/<%=locale.code %>.png" title="<%=locale.title %>"/>
+                  </a></li>
+                <% end %>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <% if flash.has? :error %>
+        <div class="row-fluid">
+          <div class="span6 offset3">
+            <div class="alert fade in alert-error">
+              <a class="close" data-dismiss="alert" href="#">&times;</a>
+              <%=flash[:error] %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+      <%= yield %>
+
     </div>
-    <%= yield %>
+
     <script type="text/javascript" src="/js/jquery.js"></script>
     <script type="text/javascript" src="/js/bootstrap.js"></script>
     <script type="text/javascript" src="/js/jquery-ui.js"></script>

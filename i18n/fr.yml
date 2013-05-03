@@ -1,0 +1,31 @@
+countries:
+  france: France
+  germany: Allemagne
+
+index:
+  title: A la recherche d'un trajet?
+
+content:
+  country: Pays
+  radius: Rayon
+  from: De
+  to: A
+  margin: Marge
+  fix: Fixe
+  day: Jour
+  days: Jours
+  booking_bullshit: Systeme de reservation
+  both: Les deux
+  sure: Oui
+  no_way: None
+  search: Recherche
+  seats_remaining: places restantes
+  new_search: Nouvelle recherche
+  unknown: Inconnus
+
+engines:
+  mitfahrgelegenheit: carpooling.fr
+  covoituragefr: covoiturage.fr
+
+other:
+  trip: trajet

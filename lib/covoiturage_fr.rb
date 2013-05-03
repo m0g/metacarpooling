@@ -92,6 +92,9 @@ class CovoiturageFr < Search
   end
 
   def result trip
+    link = link trip
+    return nil if link.empty?
+
     Result.new(
       username: trip.css('a.displayname').text.delete("\n"),
       price: trip.css('span.price span').text.delete("\n"),
@@ -100,7 +103,7 @@ class CovoiturageFr < Search
       service: service,
       from: from(trip),
       to: to(trip),
-      link: link(trip),
+      link: link,
       booking: booking(trip)
     )
   end

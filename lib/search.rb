@@ -1,18 +1,33 @@
 class Search
+  VARIABLES = [ :from_country, :from_city, :from_radius, :to_country, :to_city,
+                :to_radius, :when_margin ]
+
   def initialize search
     @locale = R18n::I18n.new(R18n.get.locale.code, './i18n/')
-
-    @from_country = search[:from][:country]
-    @from_city = search[:from][:city]
-    @from_radius = search[:from][:radius]
-
-    @to_country = search[:to][:country]
-    @to_city = search[:to][:city]
-    @to_radius = search[:to][:radius]
-
-    @when_date = Date.strptime(search[:when][:date], '%d-%m-%Y')
-    @when_margin = search[:when][:margin]
-
     @booking = search[:booking]
+
+    begin
+      @when_date = Date.strptime(search[:when][:date], '%d-%m-%Y')
+    rescue
+      @when_date = false
+    end
+
+    VARIABLES.each do |variable|
+      first_key, second_key = variable.to_s.split('_')
+
+      if search.has_key?(first_key) and search[first_key].has_key?(second_key)
+        instance_variable_set "@#{variable}", search[first_key][second_key]
+      else
+        instance_variable_set "@#{variable}", false
+      end
+    end
+  end
+
+  def validate_fields
+    VARIABLES << :when_date
+
+    VARIABLES.each do |variable|
+      return false unless instance_variable_get "@#{variable}"
+    end
   end
 end

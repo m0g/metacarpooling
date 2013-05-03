@@ -8,6 +8,7 @@ require 'json'
 require 'sinatra/r18n'
 require 'unicode'
 require 'text'
+require 'rack-flash'
 
 require_relative 'lib/result.rb'
 require_relative 'lib/search.rb'
@@ -26,6 +27,7 @@ class Metacarpooling < Sinatra::Base
 end
 
 enable :sessions
+use Rack::Flash
 
 get '/' do
   if session[:locale]
@@ -38,15 +40,25 @@ get '/' do
 end
 
 get '/:locale/' do
-  MitfahrzentraleDe::get_countries
+  #MitfahrzentraleDe::get_countries
+  #MitfahrgelegenheitDe::get_countries
+
   session[:locale] = params[:locale] if params[:locale]
 
   unless params.has_key? 'search'
     erb :index
   else
-    @results = SuperSearch.new(params[:search]).order_by_date
-    erb :results, locals: { results: @results,
-                            search: params[:search] }
+    super_search = SuperSearch.new params[:search]
+
+    if super_search.validate_fields
+      @results = super_search.process
+      erb :results, locals: { results: @results,
+                              search: params[:search] }
+    else
+      flash[:error] = "Form invalid"
+      redirect "/#{session[:locale]}/"
+      #erb :index
+    end
   end
 end
 

@@ -1,5 +1,9 @@
 class MitfahrgelegenheitDe < Search
-  DATE_FORMAT = { 'en' => '%d/%m/%y %I:%M %p', 'de' => '%d.%m.%y %H.%M Uhr' }
+  DATE_FORMAT = {
+    'en' => '%d/%m/%y %I:%M %p',
+    'fr' => '%d.%m.%y %Hh%M',
+    'de' => '%d.%m.%y %H.%M Uhr'
+  }
 
   def self.get_countries
     html = Nokogiri::HTML(open(

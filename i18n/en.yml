@@ -14,7 +14,7 @@ content:
   fix: Fix
   day: Day
   days: Days
-  booking_bullshit: Booking bullshit
+  booking_bullshit: Booking system
   both: Both
   sure: Sure
   no_way: No way
@@ -28,4 +28,4 @@ engines:
   covoituragefr: blablacar.com
 
 other:
-  trip: fahrt
+  trip: trip

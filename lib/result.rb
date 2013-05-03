@@ -1,5 +1,6 @@
 class Result
-  VARIABLES = [ :username, :price, :booking, :service, :link, :date, :places, :from, :to ]
+  VARIABLES = [ :username, :price, :booking, :service, :link, :date, :places,
+                :from, :to ]
 
   def initialize hash
     VARIABLES.each do |variable|

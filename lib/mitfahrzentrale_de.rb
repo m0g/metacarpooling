@@ -69,10 +69,14 @@ class MitfahrzentraleDe < Search
     date_string[0..3] = ''
     time_string = trip.css('td:nth-child(5)').text.gsub(/(Uhr|o\'clock)/i, '').strip
 
-    DateTime.strptime(
-      [ date_string, time_string ].join(' '),
-      '%d.%m.%Y %I:%M %p'
-    )
+    begin
+      DateTime.strptime(
+        [ date_string, time_string ].join(' '),
+        '%d.%m.%Y %I:%M %p'
+      )
+    rescue
+      raise [ date_string, time_string ].inspect
+    end
   end
 
   def result trip
@@ -89,8 +93,12 @@ class MitfahrzentraleDe < Search
   def process
     html = Nokogiri::HTML(open(query))
     html.css('div.mfz_box_body tr.mfz_rtrow').map do |trip|
-      result trip
-    end
+      if trip.css('td:nth-child(2)').text.empty?
+        nil
+      else
+        result trip
+      end
+    end.compact
   end
 
 end
