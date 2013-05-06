@@ -9,6 +9,7 @@ require 'sinatra/r18n'
 require 'unicode'
 require 'text'
 require 'rack-flash'
+require 'sinatra/config_file'
 
 require_relative 'lib/result.rb'
 require_relative 'lib/search.rb'
@@ -29,6 +30,11 @@ end
 enable :sessions
 use Rack::Flash
 
+config_file 'config.yml'
+
+COUNTRIES = settings.countries
+AVAILABLE_COUNTRIES = settings.available_countries
+
 get '/' do
   if session[:locale]
     redirect "/#{session[:locale]}/"
@@ -44,6 +50,7 @@ get '/:locale/' do
   #MitfahrgelegenheitDe::get_countries
 
   session[:locale] = params[:locale] if params[:locale]
+  #raise @available_countries.inspect
 
   unless params.has_key? 'search'
     erb :index
@@ -60,6 +67,10 @@ get '/:locale/' do
       #erb :index
     end
   end
+end
+
+get '/:locale/about' do
+  erb :about
 end
 
 not_found do

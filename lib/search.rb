@@ -30,4 +30,10 @@ class Search
       return false unless instance_variable_get "@#{variable}"
     end
   end
+
+  VARIABLES.each do |variable|
+    define_method variable do
+      instance_variable_get "@#{variable}"
+    end
+  end
 end

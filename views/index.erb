@@ -3,15 +3,18 @@
       <h1><%=t.index.title %></h1>
     </div>
   </div>
-   <div class="row-fluid">
+  <div class="row-fluid">
     <div class="span6 offset3 well">
       <form id="search-form" action="" method="get">
         <div class="row-fluid">
           <span class="span2"><%=t.content.from %>: </span>
           <select id="from-country" name="search[from][country]" class="span3">
             <option value=""><%=t.content.country %></option>
-            <option value="france" data-countrycode="fr"><%=t.countries.france %></option>
-            <option value="germany" data-countrycode="de"><%=t.countries.germany %></option>
+            <% COUNTRIES.each do |country| %>
+              <option value="<%=country['name'] %>" data-countrycode="<%=country['code'] %>">
+                <%=t.countries.send(country['name']) %>
+              </option>
+            <% end %>
           </select>
           <input type="text" id="from-city" name="search[from][city]"
                  placeholder="City" class="span4" data-countrycode=""/>
@@ -28,8 +31,11 @@
           <span class="span2"><%=t.content.to %>: </span>
           <select id="to-country" name="search[to][country]" class="span3">
             <option value=""><%=t.content.country %></option>
-            <option value="france" data-countrycode="fr"><%=t.countries.france %></option>
-            <option value="germany" data-countrycode="de"><%=t.countries.germany %></option>
+            <% COUNTRIES.each do |country| %>
+              <option value="<%=country['name'] %>" data-countrycode="<%=country['code'] %>">
+                <%=t.countries.send(country['name']) %>
+              </option>
+            <% end %>
           </select>
           <input type="text" id="to-city" name="search[to][city]"
                  placeholder="City" class="span4" data-countrycode=""/>
@@ -62,7 +68,12 @@
             <option value='no'><%=t.content.no_way %></option>
           </select>
         </div>
-        <input class="btn btn-large" type="submit" value="<%=t.content.search %>" />
+        <div class="row-fluid">
+          <div class="span2 offset5">
+            <input class="btn btn-large btn-success" type="submit" value="<%=t.content.search %>" />
+          </div>
+        </div>
+
       </form>
     </div>
   </div>

@@ -1,9 +1,13 @@
 countries:
   france: France
   germany: Germany
+  belgium: Belgium
 
 index:
   title: Looking for a ride?
+
+about:
+  title: About
 
 content:
   country: Country

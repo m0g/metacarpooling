@@ -4,3 +4,12 @@
 /*  right: 10px;*/
 /*}*/
 #main-content { margin-top: 50px }
+@media (max-width: 979px){
+  #main-content { margin-top: 0 }
+}
+
+div.price {
+  color: #F53D68;
+  font-weight: bold;
+  font-size: 22px;
+}

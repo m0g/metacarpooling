@@ -18,27 +18,29 @@
       <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="navbar-inner">
           <a class="brand" href="/">Metacarpooling.com</a>
-          <ul class="nav">
-            <li><a href="#">Link</a></li>
-          </ul>
-          <div id="language-switcher" class="btn-group pull-right">
-            <a href="#" class="btn dropdown-toggle" data-toggle="dropdown">
-              <img src="/img/flags/<%=r18n.locale.code %>.png" title="<%=r18n.locale.title %>"/>
-              <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-              <% r18n.available_locales.each do |locale| %>
-                <% if locale.code != r18n.locale.code %>
-                  <% if env['QUERY_STRING'].empty? %>
-                    <li><a href="/<%=locale.code %>/">
-                  <% else %>
-                    <li><a href="/<%=locale.code %>/?<%=env['QUERY_STRING'] %>">
-                  <% end %>
-                    <img src="/img/flags/<%=locale.code %>.png" title="<%=locale.title %>"/>
-                  </a></li>
-                <% end %>
-              <% end %>
+          <div class="pull-right">
+            <ul class="nav">
+              <li><a href="/<%=r18n.locale.code %>/about"><%=r18n.t.about.title %></a></li>
             </ul>
+            <div id="language-switcher" class="btn-group">
+              <a href="#" class="btn dropdown-toggle" data-toggle="dropdown">
+                <img src="/img/flags/<%=r18n.locale.code %>.png" title="<%=r18n.locale.title %>"/>
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <% r18n.available_locales.each do |locale| %>
+                  <% if locale.code != r18n.locale.code %>
+                    <% if env['QUERY_STRING'].empty? %>
+                      <li><a href="/<%=locale.code %>/">
+                    <% else %>
+                      <li><a href="/<%=locale.code %>/?<%=env['QUERY_STRING'] %>">
+                    <% end %>
+                      <img src="/img/flags/<%=locale.code %>.png" title="<%=locale.title %>"/>
+                    </a></li>
+                  <% end %>
+                <% end %>
+              </ul>
+            </div>
           </div>
         </div>
       </div>

@@ -8,6 +8,40 @@
  * Designed and built with all the love in the world @twitter by @mdo and @fat.
  */
 
+@font-face {
+	font-family: 'SourceSansPro';
+	src: url('../fonts/SourceSansPro-Regular.eot');
+	src: local('☺'), 
+		url('../fonts/SourceSansPro-Regular.woff') format('woff'), 
+		url('../fonts/SourceSansPro-Regular.ttf') format('truetype'), 
+		url('../fonts/SourceSansPro-Regular.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'SourceSansPro';
+	src: url('../fonts/SourceSansPro-Italic.eot');
+	src: local('☺'), 
+		url('../fonts/SourceSansPro-Italic.woff') format('woff'), 
+		url('../fonts/SourceSansPro-Italic.ttf') format('truetype'), 
+		url('../fonts/SourceSansPro-Italic.svg') format('svg');
+	font-weight: normal;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'SourceSansPro';
+	src: url('../fonts/SourceSansPro-Bold.eot');
+	src: local('☺'), 
+		url('../fonts/SourceSansPro-Bold.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/SourceSansPro-Bold.woff') format('woff'), 
+		url('../fonts/SourceSansPro-Bold.ttf') format('truetype'), 
+		url('../fonts/SourceSansPro-Bold.svg') format('svg');
+	font-weight: bold;
+	font-style: normal;
+}
+
 .clearfix {
   *zoom: 1;
 }
@@ -223,21 +257,23 @@ textarea {
 
 body {
   margin: 0;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  /*font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;*/
+  font-family: "SourceSansPro", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 20px;
-  color: #333333;
+  color: #666;
   background-color: #ffffff;
 }
 
 a {
-  color: #0088cc;
+  /*color: #B02C4B;*/
+  color: #FF6F00;
   text-decoration: none;
 }
 
 a:hover,
 a:focus {
-  color: #005580;
+  color: #B02C4B;
   text-decoration: underline;
 }
 
@@ -761,6 +797,7 @@ h1,
 h2,
 h3 {
   line-height: 40px;
+  color: #009D91;
 }
 
 h1 {
@@ -1156,14 +1193,14 @@ input[type="search"]:focus,
 input[type="tel"]:focus,
 input[type="color"]:focus,
 .uneditable-input:focus {
-  border-color: rgba(82, 168, 236, 0.8);
+  border-color: rgba(255, 111, 0, 0.8);
   outline: 0;
   outline: thin dotted \9;
   /* IE6-9 */
 
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
-     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
-          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 111, 0, 0.6);
+     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 111, 0, 0.6);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 111, 0, 0.6);
 }
 
 input[type="radio"],
@@ -3201,12 +3238,12 @@ button.close {
   cursor: pointer;
   background-color: #f5f5f5;
   *background-color: #e6e6e6;
-  background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
-  background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
-  background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
-  background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
-  background-repeat: repeat-x;
+  /*background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);*/
+  /*background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));*/
+  /*background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);*/
+  /*background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);*/
+  /*background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);*/
+  /*background-repeat: repeat-x;*/
   border: 1px solid #cccccc;
   *border: 0;
   border-color: #e6e6e6 #e6e6e6 #bfbfbf;
@@ -3450,18 +3487,19 @@ input[type="button"].btn-block {
 .btn-success {
   color: #ffffff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #5bb75b;
-  *background-color: #51a351;
-  background-image: -moz-linear-gradient(top, #62c462, #51a351);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#62c462), to(#51a351));
-  background-image: -webkit-linear-gradient(top, #62c462, #51a351);
-  background-image: -o-linear-gradient(top, #62c462, #51a351);
-  background-image: linear-gradient(to bottom, #62c462, #51a351);
-  background-repeat: repeat-x;
+  background-color: #FF9340;
+  /*background-color: #5bb75b;*/
+  /**background-color: #51a351;*/
+  /*background-image: -moz-linear-gradient(top, #62c462, #51a351);*/
+  /*background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#62c462), to(#51a351));*/
+  /*background-image: -webkit-linear-gradient(top, #62c462, #51a351);*/
+  /*background-image: -o-linear-gradient(top, #62c462, #51a351);*/
+  /*background-image: linear-gradient(to bottom, #62c462, #51a351);*/
+  /*background-repeat: repeat-x;*/
   border-color: #51a351 #51a351 #387038;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff62c462', endColorstr='#ff51a351', GradientType=0);
-  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+  /*filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff62c462', endColorstr='#ff51a351', GradientType=0);*/
+  /*filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);*/
 }
 
 .btn-success:hover,
@@ -3471,8 +3509,9 @@ input[type="button"].btn-block {
 .btn-success.disabled,
 .btn-success[disabled] {
   color: #ffffff;
-  background-color: #51a351;
-  *background-color: #499249;
+  background-color: #FF9340;
+  /*background-color: #51a351;*/
+  /**background-color: #499249;*/
 }
 
 .btn-success:active,
@@ -4791,13 +4830,13 @@ input[type="submit"].btn.btn-mini {
   /*background-repeat: repeat-x;*/
   /*border-color: #369100;*/
   /*filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff222222', endColorstr='#ff111111', GradientType=0);*/
-  background-color: #7EEF3C;
+  background-color: #009D91;
   padding: 0 10px;
 }
 
 .navbar-inverse .brand,
 .navbar-inverse .nav > li > a {
-  color: #999999;
+  color: #fff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 
@@ -4809,7 +4848,7 @@ input[type="submit"].btn.btn-mini {
 }
 
 .navbar-inverse .brand {
-  color: #999999;
+  color: #fff;
 }
 
 .navbar-inverse .navbar-text {

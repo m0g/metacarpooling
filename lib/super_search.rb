@@ -9,10 +9,15 @@ class SuperSearch
   end
 
   def initialize search
+    #raise AVAILABLE_COUNTRIES.inspect
     @results = ENGINES.map do |engine|
-      #Object::const_get(engine).new(search).process
-      Object::const_get(engine).new(search)
-    end.flatten
+      countries = AVAILABLE_COUNTRIES[engine.downcase]
+
+      if countries.include? search[:from][:country] and countries.include? search[:to][:country]
+        Object::const_get(engine).new(search)
+      end
+
+    end.compact.flatten
   end
 
   def validate_fields

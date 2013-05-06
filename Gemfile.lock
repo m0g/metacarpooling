@@ -2,6 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     addressable (2.3.3)
+    backports (3.3.0)
     daemons (1.1.9)
     eventmachine (1.0.3)
     nokogiri (1.5.9)
@@ -11,12 +12,21 @@ GEM
       rack
     rack-protection (1.5.0)
       rack
+    rack-test (0.6.2)
+      rack (>= 1.0)
     shotgun (0.9)
       rack (>= 1.0)
     sinatra (1.4.2)
       rack (~> 1.5, >= 1.5.2)
       rack-protection (~> 1.4)
       tilt (~> 1.3, >= 1.3.4)
+    sinatra-contrib (1.4.0)
+      backports (>= 2.0)
+      eventmachine
+      rack-protection
+      rack-test
+      sinatra (~> 1.4.2)
+      tilt (~> 1.3)
     sinatra-r18n (1.1.4)
       r18n-core (= 1.1.4)
       sinatra (>= 1.3)
@@ -37,6 +47,7 @@ DEPENDENCIES
   rack-flash3
   shotgun
   sinatra
+  sinatra-contrib
   sinatra-r18n
   text
   thin

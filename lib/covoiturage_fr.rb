@@ -79,16 +79,22 @@ class CovoiturageFr < Search
     if date_string.downcase == 'demain'
       date_string = (Date.today + 1).strftime('%d %B')
     else
-      date_string[0..8] = ''
+      date_string[0..7] = ''
       day_string, month_string = date_string.split ' '
       month_string = Date.month_to_english(month_string)
       date_string = [ day_string, month_string ].join ' '
     end
 
-    DateTime.strptime(
-      [ date_string, time_string ].join(' '),
-      '%d %B %Hh%M'
-    )
+    begin
+      DateTime.strptime(
+        [ date_string, time_string ].join(' '),
+        '%d %B %Hh%M'
+      )
+    rescue
+      raise date_string.inspect
+      raise trip.css('span.date')[1].text.strip.inspect
+      raise [ date_string, time_string ].join(' ').inspect
+    end
   end
 
   def result trip

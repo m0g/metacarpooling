@@ -1,6 +1,7 @@
 countries:
   france: Frankreich
   germany: Deutschland
+  belgium: Belgien
 
 index:
   title: Looking for a ride?

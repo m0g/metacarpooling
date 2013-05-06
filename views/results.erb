@@ -1,10 +1,5 @@
   <div class="row-fluid">
     <div class="span6 offset3">
-      <a href="/"><%=t.content.new_search %></a>
-    </div>
-  </div>
-  <div class="row-fluid">
-    <div class="span6 offset3">
       <h1>
         <%= search[:from][:city] %>
         to&nbsp;<%= search[:to][:city] %>
@@ -45,7 +40,7 @@
               <%=result.places %>&nbsp;<%=t.content.seats_remaining %>
             <% end %>
           </div>
-          <div class="span2 pull-right">
+          <div class="span2 pull-right price">
             <% if result.price %>
               <%= result.price %>
             <% else %>
