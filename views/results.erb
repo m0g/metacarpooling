@@ -2,10 +2,10 @@
     <div class="span6 offset3">
       <h1>
         <%= search[:from][:city] %>
-        to&nbsp;<%= search[:to][:city] %>
+        <%=t.content.to.downcase %>&nbsp;<%= search[:to][:city] %>
       </h1>
       <h2>
-        The&nbsp;<%= search[:when][:date] %>
+        <%= date.strftime('%A %d %B %Y') %>
       </h2>
     </div>
   </div>

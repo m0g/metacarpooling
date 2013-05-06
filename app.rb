@@ -50,7 +50,6 @@ get '/:locale/' do
   #MitfahrgelegenheitDe::get_countries
 
   session[:locale] = params[:locale] if params[:locale]
-  #raise @available_countries.inspect
 
   unless params.has_key? 'search'
     erb :index
@@ -59,12 +58,14 @@ get '/:locale/' do
 
     if super_search.validate_fields
       @results = super_search.process
-      erb :results, locals: { results: @results,
-                              search: params[:search] }
+      erb :results, locals: {
+        results: @results,
+        date: Date.strptime(params[:search][:when][:date], '%d-%m-%Y'),
+        search: params[:search]
+      }
     else
       flash[:error] = "Form invalid"
       redirect "/#{session[:locale]}/"
-      #erb :index
     end
   end
 end
