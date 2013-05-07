@@ -41,6 +41,16 @@
 	font-weight: bold;
 	font-style: normal;
 }
+@font-face {
+  font-family: 'GoodDog';
+  src: url('../fonts/gooddog-webfont.eot');
+  src: url('../fonts/gooddog-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/gooddog-webfont.woff') format('woff'),
+       url('../fonts/gooddog-webfont.ttf') format('truetype'),
+       url('../fonts/gooddog-webfont.svg#gooddogregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
 
 .clearfix {
   *zoom: 1;
@@ -798,6 +808,7 @@ h2,
 h3 {
   line-height: 40px;
   color: #009D91;
+  text-shadow: 0 -1px 0 #ddd;
 }
 
 h1 {
@@ -4446,10 +4457,12 @@ input[type="submit"].btn.btn-mini {
   float: left;
   padding: 10px 20px 10px;
   margin-left: -20px;
-  font-size: 20px;
+  /*font-size: 20px;*/
+  font-size: 36px;
   font-weight: 200;
   color: #777777;
   text-shadow: 0 1px 0 #ffffff;
+  font-family: "GoodDog";
 }
 
 .navbar .brand:hover,
