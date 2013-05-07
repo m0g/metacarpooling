@@ -21,6 +21,7 @@ require_relative 'lib/covoiturage_fr.rb'
 require_relative 'lib/mitfahrgelegenheit_de.rb'
 require_relative 'lib/bessermitfahren_de.rb'
 require_relative 'lib/mitfahrzentrale_de.rb'
+require_relative 'lib/fahrgemeinschaft_de.rb'
 
 class Metacarpooling < Sinatra::Base
   register Sinatra::R18n
@@ -54,6 +55,8 @@ get '/:locale/' do
   unless params.has_key? 'search'
     erb :index
   else
+    FahrgemeinschaftDe.new(params[:search]).process
+
     super_search = SuperSearch.new params[:search]
 
     if super_search.validate_fields
