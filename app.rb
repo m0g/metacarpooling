@@ -55,7 +55,7 @@ get '/:locale/' do
   unless params.has_key? 'search'
     erb :index
   else
-    FahrgemeinschaftDe.new(params[:search]).process
+    #FahrgemeinschaftDe.new(params[:search]).process
 
     super_search = SuperSearch.new params[:search]
 

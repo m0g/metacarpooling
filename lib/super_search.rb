@@ -1,6 +1,6 @@
 class SuperSearch
   ENGINES = [ 'CovoiturageFr', 'BessermitfahrenDe', 'MitfahrzentraleDe',
-              'MitfahrgelegenheitDe' ]
+              'MitfahrgelegenheitDe', 'FahrgemeinschaftDe' ]
 
   def order_by_date
     @results.sort do |x, y|
@@ -9,7 +9,6 @@ class SuperSearch
   end
 
   def initialize search
-    #raise AVAILABLE_COUNTRIES.inspect
     @results = ENGINES.map do |engine|
       countries = AVAILABLE_COUNTRIES[engine.downcase]
 

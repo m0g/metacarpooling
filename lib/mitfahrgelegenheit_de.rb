@@ -42,18 +42,19 @@ class MitfahrgelegenheitDe < Search
     ).read).each do |el|
       return el[1] if white.similarity(el[0].downcase, city.downcase) > 0.8
     end
+    nil
   end
 
   def query
-    @from_country_id = get_country_id @from_country
-    @to_country_id = get_country_id @to_country
 
     uri = Addressable::URI.new
     query_values = {
       country_from: @from_country_id,
       country_to: @to_country_id,
-      city_from: get_city_id(@from_country_id, @from_city),
-      city_to: get_city_id(@to_country_id, @to_city),
+      city_from: @from_city_id,
+      #city_from: get_city_id(@from_country_id, @from_city),
+      city_to: @to_city_id,
+      #city_to: get_city_id(@to_country_id, @to_city),
       radius_from: @from_radius, radius_to: @to_radius,
       date: 'date', tolerance: @when_margin,
       day: @when_date.strftime('%d'),
@@ -124,6 +125,11 @@ class MitfahrgelegenheitDe < Search
     bahn_el = 'td.column-8 span.sprite_icons-bahn_small'
     bus_el = 'td.column-8 img[title="Kooperationspartner"]'
     bus_el_en = 'td.column-8 img[title="Cooperations partner"]'
+
+    @from_country_id = get_country_id @from_country
+    @to_country_id = get_country_id @to_country
+    @from_city_id = get_city_id(@from_country_id, @from_city),
+    @to_city_id = get_city_id(@to_country_id, @to_city),
 
     html = Nokogiri::HTML(open(query))
     html.css('table.lift_list tr.link_hover').map do |trip|

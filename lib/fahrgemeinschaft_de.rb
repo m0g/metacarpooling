@@ -73,8 +73,6 @@ class FahrgemeinschaftDe < Search
   end
 
   def link trip
-    #raise trip.css('td:nth-child(8)').text.inspect
-
     [
       'http://www.',
       service,
@@ -82,10 +80,22 @@ class FahrgemeinschaftDe < Search
     ].join ''
   end
 
-  def result trip
+  def date trip, date_string
+    if trip.css('td:nth-child(5)').text.empty?
+      time_string = '00:00'
+    else
+      time_string = trip.css('td:nth-child(5)').text
+    end
+
+    date_string = [ date_string, time_string ].join ' '
+    DateTime.strptime date_string, '%d.%m.%Y %H:%M'
+  end
+
+  def result trip, date_string
     Result.new(
       price: trip.css('td:nth-child(6)').text.scan(/[0-9,]+\s[€]/i).first,
       service: Unicode::capitalize(service),
+      date: date(trip, date_string),
       places: trip.css('td:nth-child(7)').text.to_i,
       from: trip.css('td:nth-child(1)').text.split(', ').first.strip,
       to: trip.css('td:nth-child(3)').text.split(', ').first.strip,
@@ -101,9 +111,19 @@ class FahrgemeinschaftDe < Search
     html.css('#tableResults tr').map do |trip|
       if trip['class'].nil? and not trip.at_css('td:nth-child(4)')
         date_string = trip.css('td').text.scan(/[0-9\.]+/i).first
-      elsif trip['class'] == 'trTrip'
-        result trip
+        nil
+      elsif(
+        trip['class'] == 'trTrip' and trip.css('td:nth-child(3)').text.index(',')
+      )
+        if trip.at_css('td:nth-child(8) a img')\
+          and trip.css('td:nth-child(8) a img').first['src'] != '/gfx/ico/db.png'
+          nil
+        else
+          result trip, date_string
+        end
+      else
+        nil
       end
-    end
+    end.compact
   end
 end

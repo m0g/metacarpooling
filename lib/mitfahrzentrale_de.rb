@@ -91,6 +91,7 @@ class MitfahrzentraleDe < Search
   end
 
   def process
+    #raise query.inspect
     html = Nokogiri::HTML(open(query))
     html.css('div.mfz_box_body tr.mfz_rtrow').map do |trip|
       if trip.css('td:nth-child(2)').text.empty?
