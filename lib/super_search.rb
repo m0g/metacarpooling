@@ -20,13 +20,14 @@ class SuperSearch
   end
 
   def validate_fields
+    return false if @results.empty?
     @results.first.validate_fields
   end
 
   def process
     @results = @results.map do |result|
       result.process
-    end.flatten
+    end.compact.flatten
 
     order_by_date
   end

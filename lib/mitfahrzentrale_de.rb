@@ -65,9 +65,9 @@ class MitfahrzentraleDe < Search
   end
 
   def date trip
-    date_string = trip.css('td:nth-child(2)').text
+    date_string = trip.css('td:nth-child(3)').text
     date_string[0..3] = ''
-    time_string = trip.css('td:nth-child(5)').text.gsub(/(Uhr|o\'clock)/i, '').strip
+    time_string = trip.css('td:nth-child(6)').text.gsub(/(Uhr|o\'clock)/i, '').strip
 
     begin
       DateTime.strptime(
@@ -80,9 +80,9 @@ class MitfahrzentraleDe < Search
   end
 
   def result trip
-    Result.new(
-      from: trip.css('td:nth-child(3)').text,
-      to: trip.css('td:nth-child(4)').text,
+    check Result.new(
+      from: trip.css('td:nth-child(4)').text,
+      to: trip.css('td:nth-child(5)').text,
       date: date(trip),
       booking: false,
       link: link(trip),
@@ -90,11 +90,29 @@ class MitfahrzentraleDe < Search
     )
   end
 
+  def check result
+    from, to = false
+    white = Text::WhiteSimilarity.new
+
+    if white.similarity(result.from.downcase, @from_city.downcase) > 0.8
+      from = true
+    end
+
+    if white.similarity(result.to.downcase, @to_city.downcase) > 0.8
+      to = true
+    end
+
+    if from and to
+      result
+    else
+      nil
+    end
+  end
+
   def process
-    #raise query.inspect
     html = Nokogiri::HTML(open(query))
-    html.css('div.mfz_box_body tr.mfz_rtrow').map do |trip|
-      if trip.css('td:nth-child(2)').text.empty?
+    results = html.css('#dres div.mfz_box_body tr.mfz_rtrow').map do |trip|
+      if trip.css('td:nth-child(3)').text.empty?
         nil
       else
         result trip
