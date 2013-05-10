@@ -128,8 +128,8 @@ class MitfahrgelegenheitDe < Search
 
     @from_country_id = get_country_id @from_country
     @to_country_id = get_country_id @to_country
-    @from_city_id = get_city_id(@from_country_id, @from_city),
-    @to_city_id = get_city_id(@to_country_id, @to_city),
+    @from_city_id = get_city_id(@from_country_id, @from_city)
+    @to_city_id = get_city_id(@to_country_id, @to_city)
 
     html = Nokogiri::HTML(open(query))
     html.css('table.lift_list tr.link_hover').map do |trip|

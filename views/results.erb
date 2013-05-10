@@ -10,45 +10,53 @@
     </div>
   </div>
 
-  <% results.each do |result| %>
+  <% unless results.any? %>
     <div class="row-fluid">
-      <div class="span6 offset3 well">
-        <div class="row-fluid">
-          <div class="span8">
-            <small><%=result.from %>&nbsp;->&nbsp;<%=result.to %></small>
+      <div class="span6 offset3">
+        <%=t.content.no_trip_found %>
+      </div>
+    </div>
+  <% else %>
+    <% results.each do |result| %>
+      <div class="row-fluid">
+        <div class="span6 offset3 well">
+          <div class="row-fluid">
+            <div class="span8">
+              <small><%=result.from %>&nbsp;->&nbsp;<%=result.to %></small>
+            </div>
           </div>
-        </div>
-        <div class="row-fluid">
-          <div class="span3">
-            <% if result.username %>
-              <%= result.username %>
-            <% else %>
-              <%=t.content.unknown %>
-            <% end %>
+          <div class="row-fluid">
+            <div class="span3">
+              <% if result.username %>
+                <%= result.username %>
+              <% else %>
+                <%=t.content.unknown %>
+              <% end %>
+            </div>
+            <div class="span4"><%= result.date.strftime('%d/%m/%y %H:%M') %></div>
+            <div class="span5">
+              <a href="<%= result.link %>" target="_blank" class="pull-right">
+                See on <%= result.service %>
+              </a>
+            </div>
           </div>
-          <div class="span4"><%= result.date.strftime('%d/%m/%y %H:%M') %></div>
-          <div class="span5">
-            <a href="<%= result.link %>" target="_blank" class="pull-right">
-              See on <%= result.service %>
-            </a>
-          </div>
-        </div>
-        <div class="row-fluid">
-          <div class="span4"><b>Booking system: </b><%= result.booking %></div>
-          <div class="span3">
-            <% if result.places %>
-              <%=result.places %>&nbsp;<%=t.content.seats_remaining %>
-            <% end %>
-          </div>
-          <div class="span2 pull-right price">
-            <% if result.price %>
-              <%= result.price %>
-            <% else %>
-              ?€
-            <% end %>
+          <div class="row-fluid">
+            <div class="span4"><b>Booking system: </b><%= result.booking %></div>
+            <div class="span3">
+              <% if result.places %>
+                <%=result.places %>&nbsp;<%=t.content.seats_remaining %>
+              <% end %>
+            </div>
+            <div class="span2 pull-right price">
+              <% if result.price %>
+                <%= result.price %>
+              <% else %>
+                ?€
+              <% end %>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    <% end %>
   <% end %>
 

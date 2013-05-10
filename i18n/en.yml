@@ -27,6 +27,7 @@ content:
   seats_remaining: seats remaining
   new_search: New search
   unknown: Unknown
+  no_trip_found: No trip found
 
 engines:
   mitfahrgelegenheit: carpooling.co.uk

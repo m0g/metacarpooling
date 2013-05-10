@@ -63,7 +63,7 @@ class CovoiturageFr < Search
 
   def from trip
     if trip.at_css 'span.realfrom'
-      trip.css('span.realfrom').text
+      trip.css('span.realfrom').text.split(' → ').first
     else
       trip.css('div.one-trip-info h2 a').text.split(' → ').first
     end
