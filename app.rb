@@ -56,8 +56,6 @@ get '/:locale/' do
   unless params.has_key? 'search'
     erb :index
   else
-    CovoituragelibreFr.new(params[:search]).process
-
     super_search = SuperSearch.new params[:search]
 
     if super_search.validate_fields

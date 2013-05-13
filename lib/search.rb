@@ -36,4 +36,12 @@ class Search
       instance_variable_get "@#{variable}"
     end
   end
+
+  def get_country_code country
+    AVAILABLE_COUNTRIES.each do |available_country|
+      return available_country.code.upcase if available_country == country.downcase
+    end
+
+    nil
+  end
 end

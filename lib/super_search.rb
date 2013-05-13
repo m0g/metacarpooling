@@ -1,6 +1,6 @@
 class SuperSearch
   ENGINES = [ 'CovoiturageFr', 'BessermitfahrenDe', 'MitfahrzentraleDe',
-              'MitfahrgelegenheitDe', 'FahrgemeinschaftDe' ]
+              'MitfahrgelegenheitDe', 'FahrgemeinschaftDe', 'CovoituragelibreFr'  ]
 
   def order_by_date
     @results.sort do |x, y|
