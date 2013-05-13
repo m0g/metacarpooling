@@ -1,5 +1,5 @@
   <div class="row-fluid">
-    <div class="span6 offset3">
+    <div class="span12">
       <h1>
         <%= search[:from][:city] %>
         <%=t.content.to.downcase %>&nbsp;<%= search[:to][:city] %>
@@ -12,14 +12,14 @@
 
   <% unless results.any? %>
     <div class="row-fluid">
-      <div class="span6 offset3">
+      <div class="span12">
         <%=t.content.no_trip_found %>
       </div>
     </div>
   <% else %>
     <% results.each do |result| %>
       <div class="row-fluid">
-        <div class="span6 offset3 well">
+        <div class="span12 well">
           <div class="row-fluid">
             <div class="span8">
               <small><%=result.from %>&nbsp;->&nbsp;<%=result.to %></small>
@@ -33,7 +33,7 @@
                 <%=t.content.unknown %>
               <% end %>
             </div>
-            <div class="span4"><%= result.date.strftime('%d/%m/%y %H:%M') %></div>
+            <div class="span4 date"><%= result.date.strftime('%d %B %y - %H:%M') %></div>
             <div class="span5">
               <a href="<%= result.link %>" target="_blank" class="pull-right">
                 See on <%= result.service %>
@@ -41,18 +41,27 @@
             </div>
           </div>
           <div class="row-fluid">
-            <div class="span4"><b>Booking system: </b><%= result.booking %></div>
-            <div class="span3">
+            <div class="span4">
+              <b>Booking system: </b>
+              <% if result.booking %>
+                <%=t.content.yeah %>
+              <% else %>
+                <%=t.content.nah %>
+              <% end %>
+            </div>
+            <div class="span4">
               <% if result.places %>
                 <%=result.places %>&nbsp;<%=t.content.seats_remaining %>
               <% end %>
             </div>
-            <div class="span2 pull-right price">
-              <% if result.price %>
-                <%= result.price %>
-              <% else %>
-                ?€
-              <% end %>
+            <div class="span4 price">
+              <div class="pull-right">
+                <% if result.price %>
+                  <%= result.price %>
+                <% else %>
+                  ?€
+                <% end %>
+              </div>
             </div>
           </div>
         </div>

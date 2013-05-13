@@ -4,25 +4,32 @@ countries:
   belgium: Belgien
 
 index:
-  title: Looking for a ride?
+  title: Suchst du einer Fahrt?
+
+about:
+  title: Über
 
 content:
   country: Land
+  city: Stadt
   radius: Umkreis
   from: Von
   to: Nach
-  margin: Margin
+  margin: Toleranz
   fix: Fix
   day: Tag
-  days: Days
-  booking_bullshit: Booking bullshit
-  both: Both
-  sure: Sure
+  days: Tage
+  date: Datum
+  booking_system: Buchungssisystem
+  both: Beide
+  sure: Ja
   no_way: Nein
   search: Suche
   seats_remaining: seats remaining
   new_search: Neue Suche
-  unknown: Unknown
+  unknown: Unbekannt
+  yeah: ja
+  nah: nein
 
 engines:
   mitfahrgelegenheit: mitfahrgelegenheit.de

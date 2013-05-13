@@ -29,7 +29,7 @@ class FahrgemeinschaftDe < Search
       Address: [ @from_city, from_country_de ].join(', '),
       Accuracy: "",
       LocalityName: @from_city,
-      CountryCode: "DE",
+      CountryCode: get_country_code(@from_country),
       CountryName: from_country_de, # We need to use the german name
       Longitude: from_lng,
       Latitude: from_lat,
@@ -42,7 +42,7 @@ class FahrgemeinschaftDe < Search
       Address: [ @to_city, to_country_de ].join(', '),
       Accuracy: "",
       LocalityName: @from_city,
-      CountryCode: "DE",
+      CountryCode: get_country_code(@to_country),
       CountryName: to_country_de, # We need to use the german name
       Longitude: to_lng,
       Latitude: to_lat,

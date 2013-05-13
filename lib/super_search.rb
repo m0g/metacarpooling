@@ -1,5 +1,6 @@
 class SuperSearch
-  ENGINES = [ 'CovoiturageFr', 'BessermitfahrenDe', 'MitfahrzentraleDe',
+  ENGINES = [ 'CovoiturageFr', 'BessermitfahrenDe', 
+              #'MitfahrzentraleDe',
               'MitfahrgelegenheitDe', 'FahrgemeinschaftDe', 'CovoituragelibreFr'  ]
 
   def order_by_date

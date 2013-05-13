@@ -66,7 +66,7 @@ get '/:locale/' do
         search: params[:search]
       }
     else
-      flash[:error] = "Form invalid"
+      flash[:error] = :form_invalid
       redirect "/#{session[:locale]}/"
     end
   end

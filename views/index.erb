@@ -1,10 +1,10 @@
   <div class="row-fluid">
-    <div class="span6 offset3 text-center">
+    <div class="span12 text-center">
       <h1><%=t.index.title %></h1>
     </div>
   </div>
   <div class="row-fluid">
-    <div class="span6 offset3 well">
+    <div class="span12 well">
       <form id="search-form" action="" method="get">
         <div class="row-fluid">
           <span class="span2"><%=t.content.from %>: </span>
@@ -17,7 +17,7 @@
             <% end %>
           </select>
           <input type="text" id="from-city" name="search[from][city]"
-                 placeholder="City" class="span4" data-countrycode=""/>
+                 placeholder="<%=t.content.city %>" class="span4" data-countrycode=""/>
           <select name="search[from][radius]" class="span3">
             <option value="1"><%=t.content.radius %></option>
 
@@ -38,7 +38,7 @@
             <% end %>
           </select>
           <input type="text" id="to-city" name="search[to][city]"
-                 placeholder="City" class="span4" data-countrycode=""/>
+          placeholder="<%=t.content.city %>" class="span4" data-countrycode=""/>
           <select name="search[to][radius]" class="span3">
             <option value="1"><%=t.content.radius %></option>
 
@@ -49,11 +49,10 @@
           </select>
         </div>
         <div class="row-fluid">
-          <input id="when-date" type="text" placeholder="Date"
+          <input id="when-date" type="text" placeholder="<%=t.content.date %>"
                  name="search[when][date]" class="span5 offset2"/>
           <select name="search[when][margin]" class="span5">
             <option value=""><%=t.content.margin %></option>
-            <option value="0"><%=t.content.fix %></option>
             <option value="1">+/-1 <%=t.content.day %></option>
             <option value="2">+/-2 <%=t.content.days %></option>
             <option value="3">+/-3 <%=t.content.days %></option>
@@ -61,7 +60,7 @@
           </select>
         </div>
         <div class="row-fluid">
-          <span class="span5 offset2"><%=t.content.booking_bullshit %>: </span>
+          <span class="span5 offset2"><%=t.content.booking_system %>: </span>
           <select id="booking" name="search[booking]" class="span5">
             <option value='both'><%=t.content.both %></option>
             <option value='yes'><%=t.content.sure %></option>

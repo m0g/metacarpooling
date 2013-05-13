@@ -20,6 +20,7 @@
           <a class="brand" href="/">Metacarpooling.com</a>
           <div class="pull-right">
             <ul class="nav">
+              <li><a href="/<%=r18n.locale.code %>/feedback"><%=r18n.t.feedback.title %></a></li>
               <li><a href="/<%=r18n.locale.code %>/about"><%=r18n.t.about.title %></a></li>
             </ul>
             <div id="language-switcher" class="btn-group">
@@ -47,10 +48,10 @@
 
       <% if flash.has? :error %>
         <div class="row-fluid">
-          <div class="span6 offset3">
+          <div class="span12">
             <div class="alert fade in alert-error">
               <a class="close" data-dismiss="alert" href="#">&times;</a>
-              <%=flash[:error] %>
+              <%=t.error.send flash[:error] %>
             </div>
           </div>
         </div>

@@ -10,8 +10,12 @@ index:
 about:
   title: About
 
+feedback:
+  title: Feedback
+
 content:
   country: Country
+  city: City
   radius: Radius
   from: From
   to: To
@@ -19,7 +23,8 @@ content:
   fix: Fix
   day: Day
   days: Days
-  booking_bullshit: Booking system
+  date: Date
+  booking_system: Booking system
   both: Both
   sure: Sure
   no_way: No way
@@ -28,6 +33,8 @@ content:
   new_search: New search
   unknown: Unknown
   no_trip_found: No trip found
+  yeah: 'yes'
+  nah: 'no'
 
 engines:
   mitfahrgelegenheit: carpooling.co.uk

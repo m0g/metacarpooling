@@ -1,27 +1,38 @@
 countries:
   france: France
   germany: Allemagne
+  belgium: Belgique
 
 index:
-  title: A la recherche d'un trajet?
+  title: À la recherche d'un trajet?
+
+about:
+  title: À propos
 
 content:
   country: Pays
-  radius: Rayon
+  city: Ville
+  radius: Détour
   from: De
-  to: A
+  to: À
   margin: Marge
   fix: Fixe
   day: Jour
   days: Jours
-  booking_bullshit: Systeme de reservation
+  date: Date
+  booking_system: Système de réservation
   both: Les deux
   sure: Oui
-  no_way: None
-  search: Recherche
-  seats_remaining: places restantes
+  no_way: Non
+  search: Rechercher
+  seats_remaining: sièges restants
   new_search: Nouvelle recherche
-  unknown: Inconnus
+  unknown: Inconnu
+  yeah: oui
+  nah: non
+
+error:
+  form_invalid: Formulaire invalide
 
 engines:
   mitfahrgelegenheit: carpooling.fr
@@ -29,3 +40,4 @@ engines:
 
 other:
   trip: trajet
+

@@ -13,3 +13,7 @@ div.price {
   font-weight: bold;
   font-size: 22px;
 }
+
+div.date {
+  font-weight: bold;
+}
