@@ -9,6 +9,16 @@ class SuperSearch
     end
   end
 
+  def remove_complete
+    @results.map do |result|
+      if result.places == 0
+        nil
+      else
+        result
+      end
+    end.compact
+  end
+
   def initialize search
     @results = ENGINES.map do |engine|
       countries = AVAILABLE_COUNTRIES[engine.downcase]
@@ -30,6 +40,7 @@ class SuperSearch
       result.process
     end.compact.flatten
 
+    #remove_complete
     order_by_date
   end
 

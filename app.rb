@@ -29,7 +29,12 @@ class Metacarpooling < Sinatra::Base
   set :root, File.dirname(__FILE__)
 end
 
-enable :sessions
+#enable :sessions
+use Rack::Session::Cookie, :key => 'rack.session',
+                           :domain => 'metacarpooling.com',
+                           :path => '/',
+                           :expire_after => 2592000, # In seconds
+                           :secret => 'a25856hjeprieyuxoe223965'
 use Rack::Flash
 
 config_file 'config.yml'
@@ -40,7 +45,7 @@ AVAILABLE_COUNTRIES = settings.available_countries
 get '/' do
   if session[:locale]
     redirect "/#{session[:locale]}/"
-  elsif not env['HTTP_ACCEPT_LANGUAGE'].empty?
+  elsif env.has_key?('HTTP8ACCPET_LANGUAGE') and not env['HTTP_ACCEPT_LANGUAGE'].empty?
     redirect "/#{env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first}/"
   else
     redirect "/en/"

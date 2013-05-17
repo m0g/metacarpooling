@@ -125,6 +125,7 @@ class MitfahrgelegenheitDe < Search
     bahn_el = 'td.column-8 span.sprite_icons-bahn_small'
     bus_el = 'td.column-8 img[title="Kooperationspartner"]'
     bus_el_en = 'td.column-8 img[title="Cooperations partner"]'
+    bus_el_fr = 'td.column-8 img[title="Partenaire"]'
 
     @from_country_id = get_country_id @from_country
     @to_country_id = get_country_id @to_country
@@ -133,7 +134,7 @@ class MitfahrgelegenheitDe < Search
 
     html = Nokogiri::HTML(open(query))
     html.css('table.lift_list tr.link_hover').map do |trip|
-      if trip.at_css bahn_el, bus_el, bus_el_en
+      if trip.at_css bahn_el, bus_el, bus_el_en, bus_el_fr
         nil
       elsif not trip.at_css(booking_el) and @booking != 'yes'
         result trip
