@@ -1,26 +1,28 @@
+GIT
+  remote: git://github.com/gitlabhq/grit.git
+  revision: 28ba79cbf65eab76358bb8519852a59aa7c2883f
+  specs:
+
 GEM
   remote: https://rubygems.org/
   specs:
     addressable (2.3.3)
     backports (3.3.0)
-    capistrano (2.15.4)
-      highline
-      net-scp (>= 1.0.0)
-      net-sftp (>= 2.0.0)
-      net-ssh (>= 2.0.14)
-      net-ssh-gateway (>= 1.1.0)
     daemons (1.1.9)
+    dandelion (0.3.11)
+      grit (>= 2.4.1)
     diff-lcs (1.2.4)
     eventmachine (1.0.3)
-    highline (1.6.19)
-    net-scp (1.1.1)
-      net-ssh (>= 2.6.5)
+    grit (2.5.0)
+      diff-lcs (~> 1.1)
+      mime-types (~> 1.15)
+      posix-spawn (~> 0.3.6)
+    mime-types (1.23)
     net-sftp (2.1.2)
       net-ssh (>= 2.6.5)
     net-ssh (2.6.7)
-    net-ssh-gateway (1.2.0)
-      net-ssh (>= 2.6.5)
     nokogiri (1.5.9)
+    posix-spawn (0.3.6)
     r18n-core (1.1.4)
     rack (1.5.2)
     rack-flash3 (1.0.3)
@@ -66,7 +68,9 @@ PLATFORMS
 
 DEPENDENCIES
   addressable
-  capistrano
+  dandelion
+  grit!
+  net-sftp
   nokogiri
   rack-flash3
   rack-test

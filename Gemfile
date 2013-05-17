@@ -12,7 +12,9 @@ gem 'rack-flash3'
 gem 'sinatra-contrib'
 
 group :development do
-  gem 'capistrano'
+  gem 'dandelion'
+  gem 'net-sftp'
+  gem 'grit', git: 'git://github.com/gitlabhq/grit.git'
 end
 
 group :development,:test do
