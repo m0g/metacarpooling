@@ -3,9 +3,23 @@ GEM
   specs:
     addressable (2.3.3)
     backports (3.3.0)
+    capistrano (2.15.4)
+      highline
+      net-scp (>= 1.0.0)
+      net-sftp (>= 2.0.0)
+      net-ssh (>= 2.0.14)
+      net-ssh-gateway (>= 1.1.0)
     daemons (1.1.9)
     diff-lcs (1.2.4)
     eventmachine (1.0.3)
+    highline (1.6.19)
+    net-scp (1.1.1)
+      net-ssh (>= 2.6.5)
+    net-sftp (2.1.2)
+      net-ssh (>= 2.6.5)
+    net-ssh (2.6.7)
+    net-ssh-gateway (1.2.0)
+      net-ssh (>= 2.6.5)
     nokogiri (1.5.9)
     r18n-core (1.1.4)
     rack (1.5.2)
@@ -52,6 +66,7 @@ PLATFORMS
 
 DEPENDENCIES
   addressable
+  capistrano
   nokogiri
   rack-flash3
   rack-test
