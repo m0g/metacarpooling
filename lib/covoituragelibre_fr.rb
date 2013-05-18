@@ -14,6 +14,8 @@ class CovoituragelibreFr < Search
     html = Nokogiri::HTML(open(query_string))
     city = html.css("#ville_#{url} li a").first
 
+    return false if city.nil?
+
     [ city['lat'], city['lon'] ]
   end
 

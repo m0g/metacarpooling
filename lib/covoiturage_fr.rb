@@ -10,9 +10,13 @@ class CovoiturageFr < Search
 
   def query
     uri = Addressable::URI.new
+
+
     uri.query_values = {
-      fc: @from_city, fi: get_city_id(@from_city),
-      tc: @to_city, tci: get_city_id(@to_city),
+      #fc: @from_city, fi: get_city_id(@from_city),
+      #tc: @to_city, tci: get_city_id(@to_city),
+      fc: @from_city, fi: @from_city_id,
+      tc: @to_city, tci: @to_city_id,
       d: @when_date.strftime('%d/%m/%Y'),
       tp: 'BOTH', p: 1, n: 20, di: radius,
       t: 'tripsearch', a: 'searchtrip'
@@ -30,6 +34,13 @@ class CovoiturageFr < Search
     else
       false
     end
+  end
+
+  def cities_exist?
+    @from_city_id = get_city_id @from_city
+    @to_city_id = get_city_id @from_city
+
+    return false if @from_city_id.nil? or @to_city_id.nil?
   end
 
   def link trip
@@ -115,6 +126,8 @@ class CovoiturageFr < Search
   end
 
   def process
+    return nil unless cities_exist?
+
     html = Nokogiri::HTML(open(query))
     html.css('li.one-trip').map do |trip| 
       if not trip.at_css('span.with_booking') and @booking != 'yes'
