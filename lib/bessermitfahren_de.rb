@@ -18,7 +18,7 @@ class BessermitfahrenDe < Search
   end
 
   def post_params
-    {
+    params = {
       from: get_city_id(@from_country, @from_city),
       to: get_city_id(@to_country, @to_city),
       tmp_from: @from_city,
@@ -26,6 +26,8 @@ class BessermitfahrenDe < Search
       people: 1,
       date: @when_date.strftime('%d.%m.%Y')
     }
+
+    params
   end
 
   def link trip
@@ -63,6 +65,12 @@ class BessermitfahrenDe < Search
   end
 
   def process
+    begin
+      @when_date.strftime('%d.%m.%Y')
+    rescue
+      @when_date = Date.strptime(@when_date, '%d-%m-%Y')
+    end
+
     uri = URI('http://www.bessermitfahren.de/')
     res = Net::HTTP.post_form(uri, post_params)
     redirection = res.header['location']

@@ -46,7 +46,6 @@ class MitfahrgelegenheitDe < Search
   end
 
   def query
-
     uri = Addressable::URI.new
     query_values = {
       country_from: @from_country_id,
@@ -127,10 +126,18 @@ class MitfahrgelegenheitDe < Search
     bus_el_en = 'td.column-8 img[title="Cooperations partner"]'
     bus_el_fr = 'td.column-8 img[title="Partenaire"]'
 
+    begin
+      @when_date.strftime('%d.%m.%Y')
+    rescue
+      @when_date = Date.strptime(@when_date, '%d-%m-%Y')
+    end
+
     @from_country_id = get_country_id @from_country
     @to_country_id = get_country_id @to_country
     @from_city_id = get_city_id(@from_country_id, @from_city)
     @to_city_id = get_city_id(@to_country_id, @to_city)
+
+    return nil if @from_city_id.nil? or @to_city_id.nil?
 
     html = Nokogiri::HTML(open(query))
     html.css('table.lift_list tr.link_hover').map do |trip|

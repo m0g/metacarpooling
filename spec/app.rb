@@ -24,12 +24,27 @@ describe "Metacarpooling App" do
     last_response.should be_ok
   end
 
-  it "Should return false when the city name is invalid" do
+  it "Should return not found when the city name is invalid" do
     @query[:search][:from][:city] = 'Bbbberlin'
     @query[:search][:to][:country] = 'france'
     @query[:search][:to][:city] = 'trololo'
 
     get '/en/', @query
     last_response.should be_ok
+
+    Nokogiri::HTML(last_response.body)
+      .at_css('.not-found')
+      .should be_true
+  end
+
+  it "Should return not found when the date is in the past" do
+    @query[:search][:when][:date] = (Date.today - 1).strftime '%d-%m-%Y'
+
+    get '/en/', @query
+    last_response.body.should be_empty
+
+    #Nokogiri::HTML(last_response.body)
+    #  .at_css('.not-found')
+    #  .should be_true
   end
 end

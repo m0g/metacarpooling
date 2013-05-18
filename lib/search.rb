@@ -29,6 +29,16 @@ class Search
     VARIABLES.each do |variable|
       return false unless instance_variable_get "@#{variable}"
     end
+
+    begin
+      @when_date.strftime('%d.%m.%Y')
+    rescue
+      @when_date = Date.strptime(@when_date, '%d-%m-%Y')
+    end
+
+    return false if @when_date < Date.today
+
+    true
   end
 
   VARIABLES.each do |variable|

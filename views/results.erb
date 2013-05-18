@@ -13,7 +13,9 @@
   <% unless results.any? %>
     <div class="row-fluid">
       <div class="span12">
-        <%=t.content.no_trip_found %>
+        <span class="not-found">
+          <%=t.content.no_trip_found %>
+        </span>
       </div>
     </div>
   <% else %>

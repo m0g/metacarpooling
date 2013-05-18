@@ -105,6 +105,12 @@ class FahrgemeinschaftDe < Search
   end
 
   def process
+    begin
+      @when_date.strftime('%d.%m.%Y')
+    rescue
+      @when_date = Date.strptime(@when_date, '%d-%m-%Y')
+    end
+
     date_string = ''
 
     html = Nokogiri::HTML(open(query))
