@@ -10,6 +10,7 @@ require 'unicode'
 require 'text'
 require 'rack-flash'
 require 'sinatra/config_file'
+require 'rdiscount'
 
 require_relative 'lib/result.rb'
 require_relative 'lib/search.rb'
@@ -41,6 +42,7 @@ config_file 'config.yml'
 
 COUNTRIES = settings.countries
 AVAILABLE_COUNTRIES = settings.available_countries
+RECAPTCHA = settings.recaptcha
 
 get '/' do
   if session[:locale]
@@ -86,10 +88,16 @@ get '/:locale/' do
 end
 
 get '/:locale/about' do
-  erb :about
+  erb :about, locals: {
+    markdown: RDiscount.new(File.open('content/about.md', 'r').read).to_html
+  }
+end
+
+get '/:locale/feedback' do
+  erb :feedback
 end
 
 not_found do
   status 404
-  'not found'
+  erb :not_found
 end

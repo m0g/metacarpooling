@@ -1,0 +1,67 @@
+  <script type="text/javascript">
+    var RecaptchaOptions = {
+      lang: '<%=r18n.locale.code %>',
+      theme: 'clean'
+    };
+  </script>
+
+  <div class="row-fluid">
+    <div class="span12 text-center">
+      <h1><%=t.feedback.title %></h1>
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="span12 well">
+      <form id="feedback-form" action="" method="post">
+        <div class="row-fluid">
+          <input type="text" placeholder="<%=t.content.your_name %>"
+                 id="name" name="name" class="span12" />
+        </div>
+        <div class="row-fluid">
+          <input type="text" placeholder="<%=t.content.your_email %>"
+                 id="email" name="email" class="span12" />
+        </div>
+        <div class="row-fluid">
+          <label class="span12" for="subject"><%=t.content.subject %>:</label>
+        </div>
+        <div class="row-fluid">
+          <select id="subject" name="subject" class="span12">
+            <option value=""><%=t.feedback.subject.default %></option>
+            <option value="suggestion"><%=t.feedback.subject.suggestion %></option>
+            <option value="bug"><%=t.feedback.subject.bug %></option>
+            <option value="hello"><%=t.feedback.subject.hello %></option>
+          </select>
+        </div>
+        <div class="row-fluid">
+          <label class="span12" for="message"><%=t.content.your_message %>:</label>
+        </div>
+        <div class="row-fluid">
+          <textarea id="message" class="span12" name="message" rows="6">
+          </textarea>
+        </div>
+
+        <div class="row-fluid">
+          <div class="span12">
+            <script type="text/javascript"
+              src="http://www.google.com/recaptcha/api/challenge?k=<%=RECAPTCHA[:public_key] %>">
+            </script>
+            <noscript>
+               <iframe src="http://www.google.com/recaptcha/api/noscript?k=<%=RECAPTCHA[:public_key] %>"
+                   height="300" width="500" frameborder="0"></iframe><br>
+               <textarea name="recaptcha_challenge_field" rows="3" cols="40">
+               </textarea>
+               <input type="hidden" name="recaptcha_response_field"
+                   value="manual_challenge">
+            </noscript>
+          </div>
+        </div>
+
+        <div class="row-fluid">
+          <div class="span2 offset5">
+            <input class="btn btn-large btn-success" type="submit" value="<%=t.content.send_form %>" />
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>

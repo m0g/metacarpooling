@@ -17,3 +17,8 @@ div.price {
 div.date {
   font-weight: bold;
 }
+
+#recaptcha_widget_div {
+  width: 100%;
+  margin-bottom: 20px;
+}

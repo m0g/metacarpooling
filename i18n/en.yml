@@ -12,6 +12,11 @@ about:
 
 feedback:
   title: Feedback
+  subject:
+    default: Please select one of the following option
+    suggestion: If you have any suggestion
+    bug: If you encounter any bug
+    hello: If you just want to say hello
 
 content:
   country: Country
@@ -35,6 +40,11 @@ content:
   no_trip_found: No trip found
   yeah: 'yes'
   nah: 'no'
+  your_name: Your name
+  your_email: Your email
+  your_message: Your message
+  send_form: Send
+  subject: Subject
 
 engines:
   mitfahrgelegenheit: carpooling.co.uk

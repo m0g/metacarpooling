@@ -31,6 +31,7 @@ GEM
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
+    rdiscount (2.0.7.3)
     rspec (2.13.0)
       rspec-core (~> 2.13.0)
       rspec-expectations (~> 2.13.0)
@@ -74,6 +75,7 @@ DEPENDENCIES
   nokogiri
   rack-flash3
   rack-test
+  rdiscount
   rspec
   shotgun
   sinatra

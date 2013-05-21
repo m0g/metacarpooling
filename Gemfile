@@ -10,6 +10,7 @@ gem 'unicode'
 gem 'text'
 gem 'rack-flash3'
 gem 'sinatra-contrib'
+gem 'rdiscount'
 
 group :development do
   gem 'dandelion'
