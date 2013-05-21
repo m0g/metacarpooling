@@ -85,13 +85,6 @@ get '/:locale/' do
   end
 end
 
-get '/get_countries' do
-  raise env['REMOTE_ADDR'].inspect
-
-  MitfahrzentraleDe::get_countries
-  MitfahrgelegenheitDe::get_countries
-end
-
 get '/:locale/about' do
   erb :about, locals: {
     markdown: RDiscount.new(File.open('content/about.md', 'r').read).to_html
