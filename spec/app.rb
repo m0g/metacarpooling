@@ -42,9 +42,12 @@ describe "Metacarpooling App" do
 
     get '/en/', @query
     last_response.body.should be_empty
+  end
 
-    #Nokogiri::HTML(last_response.body)
-    #  .at_css('.not-found')
-    #  .should be_true
+  it "Should return an error when random symbol are inserted in the city name" do
+    @query[:search][:from][:city] = 'Be^rlùù*n'
+
+    get '/en/', @query
+    last_response.should be_ok
   end
 end

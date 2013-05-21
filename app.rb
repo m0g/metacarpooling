@@ -56,6 +56,14 @@ get '/:locale/' do
   #MitfahrzentraleDe::get_countries
   #MitfahrgelegenheitDe::get_countries
 
+  unless R18n.available_locales.any? {|locale| locale.code == params[:locale] }
+    if session.has_key? :locale
+      redirect "/#{session[:locale]}/"
+    else
+      redirect "/en/"
+    end
+  end
+
   session[:locale] = params[:locale] if params[:locale]
 
   unless params.has_key? 'search'

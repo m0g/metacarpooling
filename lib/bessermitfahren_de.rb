@@ -12,15 +12,17 @@ class BessermitfahrenDe < Search
 
   def get_city_id country, city
     country_city = [ city, country ].join ', '
-
     exotic_result = open(city_query(country_city)).read.split('new Array')
+
+    return nil if exotic_result.empty?
+
     exotic_result[2].gsub(/[()']/, '').split(',')[0]
   end
 
   def post_params
     params = {
-      from: get_city_id(@from_country, @from_city),
-      to: get_city_id(@to_country, @to_city),
+      from: @from_city_id,
+      to: @to_city_id,
       tmp_from: @from_city,
       tmp_to: @to_city,
       people: 1,
@@ -70,6 +72,11 @@ class BessermitfahrenDe < Search
     rescue
       @when_date = Date.strptime(@when_date, '%d-%m-%Y')
     end
+
+    @from_city_id = get_city_id(@from_country, @from_city)
+    @ti_city_id = get_city_id(@to_country, @to_city)
+
+    return nil if @from_city_id.nil? or @to_city_id.nil?
 
     uri = URI('http://www.bessermitfahren.de/')
     res = Net::HTTP.post_form(uri, post_params)
