@@ -55,8 +55,6 @@ get '/' do
 end
 
 get '/:locale/' do
-  #MitfahrzentraleDe::get_countries
-  #MitfahrgelegenheitDe::get_countries
 
   unless R18n.available_locales.any? {|locale| locale.code == params[:locale] }
     if session.has_key? :locale
@@ -85,6 +83,13 @@ get '/:locale/' do
       redirect "/#{session[:locale]}/"
     end
   end
+end
+
+get '/get_countries' do
+  raise env['REMOTE_ADDR'].inspect
+
+  MitfahrzentraleDe::get_countries
+  MitfahrgelegenheitDe::get_countries
 end
 
 get '/:locale/about' do
