@@ -18,6 +18,7 @@ require_relative 'lib/search.rb'
 require_relative 'lib/super_search.rb'
 require_relative 'lib/dates_international.rb'
 require_relative 'lib/feedback.rb'
+require_relative 'lib/recaptcha.rb'
 
 # Search engines
 require_relative 'lib/covoiturage_fr.rb'
@@ -100,13 +101,21 @@ end
 
 post '/:locale/feedback' do
   feedback = Feedback.new params[:feedback]
+  recaptcha = Recaptcha.new(
+    params[:recaptcha_challenge_field],
+    params[:recaptcha_response_field],
+    env['REMOTE_ADDR']
+  )
   json = Hash.new
 
-  if feedback.valid?
+  feeback_valid = feedback.valid?
+  if recaptcha.valid? and feedback_valid
     json[:success] = true
     feedback.send
   else
-    json = { success: false, errors: feedback.errors_to_json }
+    json = { success: false,
+             recaptcha_error: recaptcha.error?.to_s,
+             errors: feedback.errors_to_json }
   end
 
   content_type :json

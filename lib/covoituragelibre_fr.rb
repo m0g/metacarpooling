@@ -94,6 +94,12 @@ class CovoituragelibreFr < Search
   end
 
   def process
+    begin
+      @when_date.strftime('%d.%m.%Y')
+    rescue
+      @when_date = Date.strptime(@when_date, '%d-%m-%Y')
+    end
+
     @from_lat, @from_lng =  get_from_city_id()
     @to_lat, @to_lng =  get_to_city_id()
 

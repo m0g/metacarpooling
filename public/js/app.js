@@ -85,6 +85,17 @@
 
   Feedback = {
 
+    displayCaptcha: function() {
+      Recaptcha.create($('#recaptcha').data('pubkey'),
+        "recaptcha",
+        {
+          theme: $('#recaptcha').data('theme'),
+          lang: $('#recaptcha').data('lang'),
+          callback: Recaptcha.focus_response_field
+        }
+      );
+    },
+
     resetErrors: function() {
       $('div.control-group').removeClass('error');
       $('span.help-inline').remove()
@@ -94,6 +105,7 @@
       Feedback.resetErrors();
 
       if (!data.success) {
+        Feedback.displayCaptcha();
         var errors = JSON.parse(data.errors);
         for (el in errors){
           var controlGroup = $('#'+el).parent('.control-group');
@@ -121,6 +133,7 @@
 
     init: function() {
       this.events();
+      this.displayCaptcha();
     }
 
   }

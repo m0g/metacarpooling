@@ -17,7 +17,6 @@ class Feedback
 
     VARIABLES.each do |variable|
       if instance_variable_get("@#{variable}").empty?
-        #@errors[variable] = :empty
         @errors[variable] = @locale.t.errors.send(variable).empty
       end
     end
@@ -42,7 +41,7 @@ class Feedback
     raise Pony.mail(
       to: 'nogues.loic@gmail.com',
       from: 'me@example.com',
-      via: :sendmail,
+      #via: :sendmail,
       subject: 'hi',
       body: 'Hello there.'
     ).inspect

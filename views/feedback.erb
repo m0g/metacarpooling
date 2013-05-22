@@ -1,9 +1,9 @@
-  <script type="text/javascript">
+  <!--<script type="text/javascript">
     var RecaptchaOptions = {
       lang: '<%=r18n.locale.code %>',
       theme: 'clean'
     };
-  </script>
+  </script>-->
 
   <div class="row-fluid">
     <div class="span12 text-center">
@@ -42,7 +42,9 @@
 
         <div class="row-fluid">
           <div class="span12">
-            <script type="text/javascript"
+            <div id="recaptcha" data-lang="<%=r18n.locale.code %>"
+                 data-theme="clean" data-pubkey="<%=RECAPTCHA[:public_key] %>"></div>
+            <!--<script type="text/javascript"
               src="http://www.google.com/recaptcha/api/challenge?k=<%=RECAPTCHA[:public_key] %>">
             </script>
             <noscript>
@@ -52,7 +54,7 @@
                </textarea>
                <input type="hidden" name="recaptcha_response_field"
                    value="manual_challenge">
-            </noscript>
+             </noscript>-->
           </div>
         </div>
 
