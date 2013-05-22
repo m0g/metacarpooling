@@ -12,6 +12,8 @@ require 'rack-flash'
 require 'sinatra/config_file'
 require 'rdiscount'
 require 'pony'
+require 'sinatra/base'
+require 'sinatra/assetpack'
 
 require_relative 'lib/result.rb'
 require_relative 'lib/search.rb'
@@ -31,6 +33,28 @@ require_relative 'lib/covoituragelibre_fr.rb'
 class Metacarpooling < Sinatra::Base
   register Sinatra::R18n
   set :root, File.dirname(__FILE__)
+  register Sinatra::AssetPack
+
+  assets {
+    serve '/js', from: 'assets/js'
+    js :application, [
+      '/js/app.js',
+      '/js/bootstrap.js',
+      '/js/jquery.js',
+      '/js/jquery-ui.js'
+    ]
+
+    serve '/css', from: 'assets/css'
+    css :application, [
+      '/css/app.css',
+      '/css/bootstrap.css',
+      '/css/bootstrap-responsive.css',
+      '/css/jquery-ui.css'
+    ]
+
+    js_compression  :jsmin    # :jsmin | :yui | :closure | :uglify
+    css_compression :simple   # :simple | :sass | :yui | :sqwish
+  }
 end
 
 #enable :sessions

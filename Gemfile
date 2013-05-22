@@ -12,6 +12,8 @@ gem 'rack-flash3'
 gem 'sinatra-contrib'
 gem 'rdiscount'
 gem 'pony'
+gem 'sinatra-assetpack', :require => 'sinatra/assetpack'
+gem 'rake'
 
 group :development do
   gem 'dandelion'

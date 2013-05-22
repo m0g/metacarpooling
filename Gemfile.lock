@@ -17,6 +17,7 @@ GEM
       diff-lcs (~> 1.1)
       mime-types (~> 1.15)
       posix-spawn (~> 0.3.6)
+    jsmin (1.0.1)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -37,6 +38,7 @@ GEM
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
+    rake (10.0.4)
     rdiscount (2.0.7.3)
     rspec (2.13.0)
       rspec-core (~> 2.13.0)
@@ -52,6 +54,12 @@ GEM
       rack (~> 1.5, >= 1.5.2)
       rack-protection (~> 1.4)
       tilt (~> 1.3, >= 1.3.4)
+    sinatra-assetpack (0.2.2)
+      backports
+      jsmin
+      rack-test
+      sinatra
+      tilt (>= 1.3.0)
     sinatra-contrib (1.4.0)
       backports (>= 2.0)
       eventmachine
@@ -85,10 +93,12 @@ DEPENDENCIES
   pony
   rack-flash3
   rack-test
+  rake
   rdiscount
   rspec
   shotgun
   sinatra
+  sinatra-assetpack
   sinatra-contrib
   sinatra-r18n
   text

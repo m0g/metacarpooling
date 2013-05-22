@@ -3,3 +3,5 @@
 *.old
 data/
 config.yml
+public/js/
+public/css/
