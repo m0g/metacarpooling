@@ -108,7 +108,7 @@ post '/:locale/feedback' do
   )
   json = Hash.new
 
-  feeback_valid = feedback.valid?
+  feedback_valid = feedback.valid?
   if recaptcha.valid? and feedback_valid
     json[:success] = true
     feedback.send
