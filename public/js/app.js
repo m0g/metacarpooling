@@ -112,6 +112,9 @@
           controlGroup.addClass('error');
           controlGroup.append('<span class="help-inline">'+errors[el]+'</span>');
         }
+      } else {
+        $('#feedback-alert').parent().removeClass('hide');
+        $('#feedback-alert').removeClass('out').addClass('in');
       }
     },
 

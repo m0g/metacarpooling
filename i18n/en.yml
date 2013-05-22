@@ -45,6 +45,7 @@ content:
   your_message: Your message
   send_form: Send
   subject: Subject
+  message_has_been_sent: Message has been sent
 
 errors:
   name:
