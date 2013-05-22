@@ -4,6 +4,8 @@
     init: function() {
       if ($('#search-form').length > 0)
         Form.init();
+      else if ($('#feedback-form').length > 0)
+        Feedback.init();
     }
 
   },
@@ -77,6 +79,48 @@
       this.events();
       this.disableCityInputs();
       $("#when-date").datepicker({ dateFormat: "dd-mm-yy" });
+    }
+
+  },
+
+  Feedback = {
+
+    resetErrors: function() {
+      $('div.control-group').removeClass('error');
+      $('span.help-inline').remove()
+    },
+
+    getResults: function(data) {
+      Feedback.resetErrors();
+
+      if (!data.success) {
+        var errors = JSON.parse(data.errors);
+        for (el in errors){
+          var controlGroup = $('#'+el).parent('.control-group');
+          controlGroup.addClass('error');
+          controlGroup.append('<span class="help-inline">'+errors[el]+'</span>');
+        }
+      }
+    },
+
+    submitForm: function(e) {
+      e.preventDefault();
+      var serializedData = $(this).serialize();
+      var actionUrl = $(this).attr('action');
+
+      $.ajax({
+        url: actionUrl,
+        data: serializedData,
+        type: 'POST'
+      }).done(Feedback.getResults);
+    },
+
+    events: function() {
+      $('#feedback-form').submit(this.submitForm);
+    },
+
+    init: function() {
+      this.events();
     }
 
   }

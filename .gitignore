@@ -2,3 +2,4 @@
 *.swo
 *.old
 data/
+config.yml

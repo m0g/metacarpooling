@@ -11,11 +11,13 @@ require 'text'
 require 'rack-flash'
 require 'sinatra/config_file'
 require 'rdiscount'
+require 'pony'
 
 require_relative 'lib/result.rb'
 require_relative 'lib/search.rb'
 require_relative 'lib/super_search.rb'
 require_relative 'lib/dates_international.rb'
+require_relative 'lib/feedback.rb'
 
 # Search engines
 require_relative 'lib/covoiturage_fr.rb'
@@ -43,11 +45,12 @@ config_file 'config.yml'
 COUNTRIES = settings.countries
 AVAILABLE_COUNTRIES = settings.available_countries
 RECAPTCHA = settings.recaptcha
+GOOGLE_ANALYTICS = settings.google_analytics
 
 get '/' do
   if session[:locale]
     redirect "/#{session[:locale]}/"
-  elsif env.has_key?('HTTP8ACCPET_LANGUAGE') and not env['HTTP_ACCEPT_LANGUAGE'].empty?
+  elsif env.has_key?('HTTP_ACCEPT_LANGUAGE') and not env['HTTP_ACCEPT_LANGUAGE'].empty?
     redirect "/#{env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first}/"
   else
     redirect "/en/"
@@ -93,6 +96,21 @@ end
 
 get '/:locale/feedback' do
   erb :feedback
+end
+
+post '/:locale/feedback' do
+  feedback = Feedback.new params[:feedback]
+  json = Hash.new
+
+  if feedback.valid?
+    json[:success] = true
+    feedback.send
+  else
+    json = { success: false, errors: feedback.errors_to_json }
+  end
+
+  content_type :json
+  json.to_json
 end
 
 not_found do

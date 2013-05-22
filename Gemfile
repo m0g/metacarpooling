@@ -11,6 +11,7 @@ gem 'text'
 gem 'rack-flash3'
 gem 'sinatra-contrib'
 gem 'rdiscount'
+gem 'pony'
 
 group :development do
   gem 'dandelion'

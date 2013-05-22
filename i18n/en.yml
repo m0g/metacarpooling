@@ -14,9 +14,9 @@ feedback:
   title: Feedback
   subject:
     default: Please select one of the following option
-    suggestion: If you have any suggestion
-    bug: If you encounter any bug
-    hello: If you just want to say hello
+    suggestion: I have a suggestion
+    bug: I've encountered a bug
+    hello: I just want to say hello
 
 content:
   country: Country
@@ -45,6 +45,17 @@ content:
   your_message: Your message
   send_form: Send
   subject: Subject
+
+errors:
+  name:
+    empty: Name can't be empty
+  email:
+    empty: email can't be empty
+    invalid: Email is invalid
+  subject:
+    empty: Subject can't be empty
+  message:
+    empty: Message can't be empty
 
 engines:
   mitfahrgelegenheit: carpooling.co.uk

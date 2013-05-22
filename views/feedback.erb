@@ -13,20 +13,20 @@
 
   <div class="row-fluid">
     <div class="span12 well">
-      <form id="feedback-form" action="" method="post">
-        <div class="row-fluid">
+      <form id="feedback-form" action="/<%=r18n.locale.code %>/feedback" method="post">
+        <div class="row-fluid control-group">
           <input type="text" placeholder="<%=t.content.your_name %>"
-                 id="name" name="name" class="span12" />
+                 id="name" name="feedback[name]" class="span12" />
         </div>
-        <div class="row-fluid">
+        <div class="row-fluid control-group">
           <input type="text" placeholder="<%=t.content.your_email %>"
-                 id="email" name="email" class="span12" />
+                 id="email" name="feedback[email]" class="span12" />
         </div>
         <div class="row-fluid">
           <label class="span12" for="subject"><%=t.content.subject %>:</label>
         </div>
-        <div class="row-fluid">
-          <select id="subject" name="subject" class="span12">
+        <div class="row-fluid control-group">
+          <select id="subject" name="feedback[subject]" class="span12">
             <option value=""><%=t.feedback.subject.default %></option>
             <option value="suggestion"><%=t.feedback.subject.suggestion %></option>
             <option value="bug"><%=t.feedback.subject.bug %></option>
@@ -36,9 +36,8 @@
         <div class="row-fluid">
           <label class="span12" for="message"><%=t.content.your_message %>:</label>
         </div>
-        <div class="row-fluid">
-          <textarea id="message" class="span12" name="message" rows="6">
-          </textarea>
+        <div class="row-fluid control-group">
+          <textarea id="message" class="span12" name="feedback[message]" rows="6"></textarea>
         </div>
 
         <div class="row-fluid">

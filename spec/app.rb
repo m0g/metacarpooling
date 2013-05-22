@@ -50,4 +50,14 @@ describe "Metacarpooling App" do
     get '/en/', @query
     last_response.should be_ok
   end
+
+  it "Should return results when french selected" do
+    @query[:search][:from] = { country: 'france', city: 'Lyon' }
+    @query[:search][:to] = { country: 'france', city: 'Annecy' }
+    @query[:search][:when][:date] = (Date.today + 2).strftime('%d-%m-%Y')
+
+    get '/fr/', @query
+    raise last_response.inspect
+    last_response.should be_ok
+  end
 end

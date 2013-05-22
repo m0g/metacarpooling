@@ -1,0 +1,34 @@
+available_countries:
+  covoituragefr:
+    - france
+    - germany
+    - belgium
+    - poland
+  bessermitfahrende:
+    - germany
+  mitfahrgelegenheitde:
+    - france
+    - germany
+    - belgium
+    - poland
+  mitfahrzentralede:
+    - france
+    - germany
+  fahrgemeinschaftde:
+    - germany
+  covoituragelibrefr:
+    - france
+
+countries:
+  - code: fr
+    name: france
+  - code: de
+    name: germany
+  - code: be
+    name: belgium
+
+recaptcha:
+  public_key: YOUR PUBLIC KEY
+  private_key: YOUR PRIVATE KEY
+
+google_analytics: GOOGLE ANALYTICS CODE
