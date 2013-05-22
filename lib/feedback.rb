@@ -40,7 +40,8 @@ class Feedback
   def send
     Pony.mail(
       to: 'nogues.loic@gmail.com',
-      from: "#{@name} <#{@email}>",
+      #from: "#{@name} <#{@email}>",
+      from: @email,
       subject: @subject,
       body: @message
     )
