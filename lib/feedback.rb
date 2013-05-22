@@ -38,13 +38,12 @@ class Feedback
   end
 
   def send
-    raise Pony.mail(
+    Pony.mail(
       to: 'nogues.loic@gmail.com',
-      from: 'me@example.com',
-      #via: :sendmail,
-      subject: 'hi',
-      body: 'Hello there.'
-    ).inspect
+      from: "#{@name} <#{@email}>",
+      subject: @subject,
+      body: @message
+    )
   end
 
 end
