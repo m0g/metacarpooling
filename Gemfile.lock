@@ -13,6 +13,8 @@ GEM
       grit (>= 2.4.1)
     diff-lcs (1.2.4)
     eventmachine (1.0.3)
+    execjs (1.4.0)
+      multi_json (~> 1.0)
     grit (2.5.0)
       diff-lcs (~> 1.1)
       mime-types (~> 1.15)
@@ -22,6 +24,7 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.23)
+    multi_json (1.7.3)
     net-sftp (2.1.2)
       net-ssh (>= 2.6.5)
     net-ssh (2.6.7)
@@ -79,6 +82,9 @@ GEM
     treetop (1.4.12)
       polyglot
       polyglot (>= 0.3.1)
+    uglifier (2.1.1)
+      execjs (>= 0.3.0)
+      multi_json (~> 1.0, >= 1.0.2)
     unicode (0.4.4)
 
 PLATFORMS
@@ -103,4 +109,5 @@ DEPENDENCIES
   sinatra-r18n
   text
   thin
+  uglifier
   unicode

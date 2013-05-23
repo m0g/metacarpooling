@@ -3,11 +3,22 @@ countries:
   germany: Allemagne
   belgium: Belgique
 
+meta:
+  description: Search & compare carpooling
+
 index:
   title: À la recherche d'un trajet?
 
 about:
   title: À propos
+
+feedback:
+  title: Feedback
+  subject:
+    default: Merci de choisir une des options suivantes
+    suggestion: J'ai une suggestion
+    bug: J'ai trouvé un bug
+    hello: Je veux juste dire bonjour
 
 content:
   country: Pays
@@ -30,9 +41,24 @@ content:
   unknown: Inconnu
   yeah: oui
   nah: non
+  your_name: Votre nom
+  your_email: Votre prénom
+  your_message: Vote message
+  send_form: Envoyer
+  subject: Sujet
+  message_has_been_sent: Votre message à bien été envoyé
 
-error:
-  form_invalid: Formulaire invalide
+errors:
+  name:
+    empty: Le nom ne peut être vide
+  email:
+    empty: L'email ne peut être vide
+    invalid: L'email n'est pas valide
+  subject:
+    empty: Le sujet ne peut être vide
+  message:
+    empty: Le message ne peut être vide
+
 
 engines:
   mitfahrgelegenheit: carpooling.fr
