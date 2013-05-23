@@ -2,12 +2,24 @@ countries:
   france: Frankreich
   germany: Deutschland
   belgium: Belgien
+  poland: Pollen
+
+meta:
+  description: Sucht und vergleicht Mitfahrgelegenheit
 
 index:
-  title: Suchst du einer Fahrt?
+  title: Suchst du eine Fahrt?
 
 about:
   title: Über
+
+feedback:
+  title: Feedback
+  subject:
+    default: Bitte wählen Sie eine der folgenden Optionen
+    suggestion: Ich habe eine Frage
+    bug: Ich habe ein Bug gefindet
+    hello: Ich wollte nür hallo sagen
 
 content:
   country: Land
@@ -30,6 +42,23 @@ content:
   unknown: Unbekannt
   yeah: ja
   nah: nein
+  your_name: Name
+  your_email: Email
+  your_message: Nachricht
+  send_form: Senden
+  subject: Objekt
+  message_has_been_sent: Ihre Nachricht wurde gesendet
+
+errors:
+  name:
+    empty: Name kannt nicht leer sein
+  email:
+    empty: email kannt nicht leer sein
+    invalid: Email ist ungültig 
+  subject:
+    empty: Objekt kannt nicht leer sein
+  message:
+    empty: Message kannt nicht leer sein
 
 engines:
   mitfahrgelegenheit: mitfahrgelegenheit.de

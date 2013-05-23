@@ -4,6 +4,9 @@ countries:
   belgium: Belgium
   poland: Poland
 
+meta:
+  description: Search & compare carpooling
+
 index:
   title: Looking for a ride?
 
