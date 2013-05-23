@@ -39,7 +39,6 @@ class Metacarpooling < Sinatra::Base
   assets {
     serve '/js', from: 'assets/js'
     js :application, [
-      #'/js/app.js',
       '/js/metacarpooling.js',
       '/js/bootstrap.js',
       '/js/jquery.js',
