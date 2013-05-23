@@ -31,8 +31,9 @@ require_relative 'lib/fahrgemeinschaft_de.rb'
 require_relative 'lib/covoituragelibre_fr.rb'
 
 class Metacarpooling < Sinatra::Base
-  register Sinatra::R18n
   set :root, File.dirname(__FILE__)
+
+  register Sinatra::R18n
   register Sinatra::AssetPack
 
   assets {
@@ -83,6 +84,7 @@ get '/' do
 end
 
 get '/:locale/' do
+  #raise ENV['RACK_ENV'].inspect
 
   unless R18n.available_locales.any? {|locale| locale.code == params[:locale] }
     if session.has_key? :locale
