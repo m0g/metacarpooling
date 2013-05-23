@@ -14,6 +14,7 @@ gem 'rdiscount'
 gem 'pony'
 gem 'sinatra-assetpack', :require => 'sinatra/assetpack'
 gem 'rake'
+gem 'uglifier'
 
 group :development do
   gem 'dandelion'

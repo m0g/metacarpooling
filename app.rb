@@ -39,10 +39,9 @@ class Metacarpooling < Sinatra::Base
   assets {
     serve '/js', from: 'assets/js'
     js :application, [
-      '/js/metacarpooling.js',
-      '/js/bootstrap.js',
       '/js/jquery.js',
-      '/js/jquery-ui.js'
+      '/js/jquery-ui.js',
+      '/js/metacarpooling.js'
     ]
 
     serve '/css', from: 'assets/css'
@@ -53,7 +52,7 @@ class Metacarpooling < Sinatra::Base
       '/css/jquery-ui.css'
     ]
 
-    js_compression  :jsmin    # :jsmin | :yui | :closure | :uglify
+    js_compression  :uglify    # :jsmin | :yui | :closure | :uglify
     css_compression :simple   # :simple | :sass | :yui | :sqwish
   }
 end
