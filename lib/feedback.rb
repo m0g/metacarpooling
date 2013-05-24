@@ -38,9 +38,12 @@ class Feedback
   end
 
   def send
+    File.open('data/feedback.txt', 'a+') do |f|
+      f.puts [ "----", @name, @email, @subject, @message, "----" ].join "\n"
+    end
+
     Pony.mail(
       to: 'nogues.loic@gmail.com',
-      #from: @email,
       via: :smtp,
       via_options: {
         :address        => 'ssl0.ovh.net',
