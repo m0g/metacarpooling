@@ -41,7 +41,7 @@ class SuperSearch
       result.process
     end.compact.flatten
 
-    #remove_complete
+    @results = remove_complete
     order_by_date
   end
 

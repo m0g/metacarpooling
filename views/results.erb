@@ -53,7 +53,10 @@
             </div>
             <div class="span4">
               <% if result.places %>
-                <%=result.places %>&nbsp;<%=t.content.seats_remaining %>
+                <span class="nb-places">
+                  <%=result.places %>
+                </span>
+                &nbsp;<%=t.content.seats_remaining %>
               <% end %>
             </div>
             <div class="span4 price">

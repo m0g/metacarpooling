@@ -69,4 +69,13 @@ describe "Metacarpooling App" do
     get '/fr/', @query
     last_response.should be_ok
   end
+
+  it "Should not be any result with 0 seats remaining" do
+    get '/fr/', @query
+    last_response.should be_ok
+
+    Nokogiri::HTML(last_response.body).css('span.nb-places').each do |line|
+      line.text.strip.to_i.should_not eq(0)
+    end
+  end
 end
