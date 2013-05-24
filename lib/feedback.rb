@@ -40,11 +40,16 @@ class Feedback
   def send
     Pony.mail(
       to: 'nogues.loic@gmail.com',
-      from: @email,
-      via: :sendmail,
+      #from: @email,
+      via: :smtp,
       via_options: {
-        location: '/usr/sbin/sendmail'
-      }
+        :address        => 'ssl0.ovh.net',
+        :port           => '587',
+        :user_name      => 'metacarpooling@loicnogu.es',
+        :password       => 'envoiture',
+        :authentication => :plain,
+        :domain         => "metacarpooling.com"
+      },
       subject: @subject,
       body: @message
     )
