@@ -59,7 +59,6 @@ errors:
   message:
     empty: Le message ne peut être vide
 
-
 engines:
   mitfahrgelegenheit: carpooling.fr
   covoituragefr: covoiturage.fr

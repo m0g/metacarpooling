@@ -24,6 +24,16 @@ describe "Metacarpooling App" do
     last_response.should be_ok
   end
 
+  it "should return results in french" do
+    get '/fr/', @query
+    last_response.should be_ok
+  end
+
+  it "should return results in german" do
+    get '/de/', @query
+    last_response.should be_ok
+  end
+
   it "Should return not found when the city name is invalid" do
     @query[:search][:from][:city] = 'Bbbberlin'
     @query[:search][:to][:country] = 'france'
