@@ -42,6 +42,9 @@ class Feedback
       to: 'nogues.loic@gmail.com',
       from: @email,
       via: :sendmail,
+      via_options: {
+        location: '/usr/sbin/sendmail'
+      }
       subject: @subject,
       body: @message
     )
