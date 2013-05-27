@@ -107,6 +107,15 @@
       if (!data.success) {
         Feedback.displayCaptcha();
         var errors = JSON.parse(data.errors);
+
+        console.log(data.recaptcha_error);
+
+        if (data.recaptcha_error){
+          $('#recaptcha').parent('.control-group').addClass('error');
+          $('#recaptcha').parent('.control-group')
+                         .append('<span class="help-inline">Captcha</span>');
+        }
+
         for (el in errors){
           var controlGroup = $('#'+el).parent('.control-group');
           controlGroup.addClass('error');
