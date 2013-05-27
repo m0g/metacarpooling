@@ -21,7 +21,7 @@
   <% else %>
     <% results.each do |result| %>
       <div class="row-fluid">
-        <div class="span12 well">
+        <div class="span12 well" data-service="<%= result.service %>">
           <div class="row-fluid">
             <div class="span8">
               <small><%=result.from %>&nbsp;->&nbsp;<%=result.to %></small>
@@ -38,7 +38,8 @@
             <div class="span4 date"><%= result.date.strftime('%d %B %y - %H:%M') %></div>
             <div class="span5">
               <a href="<%= result.link %>" target="_blank" class="pull-right">
-                See on <%= result.service %>
+                See on
+                <span class="service"><%= result.service %></span>
               </a>
             </div>
           </div>

@@ -78,4 +78,19 @@ describe "Metacarpooling App" do
       line.text.strip.to_i.should_not eq(0)
     end
   end
+
+  it "Should return in blablacar.com for Paris Lyon trip" do
+    @query[:search][:from] = { country: 'france', city: 'Lyon', radius: '1' }
+    @query[:search][:to] = { country: 'france', city: 'Paris', radius: '1' }
+
+    get '/en/', @query
+    last_response.should be_ok
+
+    blablacar_exists = false
+    Nokogiri::HTML(last_response.body).css('span.service').each do |line|
+      blablacar_exists = true if line.text.strip == 'blablacar.com'
+    end
+
+    blablacar_exists.should be_true
+  end
 end

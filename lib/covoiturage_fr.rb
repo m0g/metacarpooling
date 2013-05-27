@@ -10,11 +10,7 @@ class CovoiturageFr < Search
 
   def query
     uri = Addressable::URI.new
-
-
     uri.query_values = {
-      #fc: @from_city, fi: get_city_id(@from_city),
-      #tc: @to_city, tci: get_city_id(@to_city),
       fc: @from_city, fi: @from_city_id,
       tc: @to_city, tci: @to_city_id,
       d: @when_date.strftime('%d/%m/%Y'),
@@ -38,9 +34,13 @@ class CovoiturageFr < Search
 
   def cities_exist?
     @from_city_id = get_city_id @from_city
-    @to_city_id = get_city_id @from_city
+    @to_city_id = get_city_id @to_city
 
-    return false if @from_city_id.nil? or @to_city_id.nil?
+    if @from_city_id.nil? or @to_city_id.nil?
+      false
+    else
+      true
+    end
   end
 
   def link trip
@@ -110,6 +110,8 @@ class CovoiturageFr < Search
 
   def result trip
     link = link trip
+
+    return nil if trip.css('span.date').first.text.strip == ': Trajet régulier'
     return nil if link.empty?
 
     Result.new(
