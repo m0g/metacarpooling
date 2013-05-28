@@ -93,4 +93,23 @@ describe "Metacarpooling App" do
 
     blablacar_exists.should be_true
   end
+
+  it "Should returns results in BMF, FGS, MFG for Berlin to Hannover" do
+    @query[:search][:from] = { country: 'germany', city: 'Berlin', radius: '1' }
+    @query[:search][:to] = { country: 'germany', city: 'Hannover', radius: '1' }
+    @query[:search][:booking] = 'no'
+
+    get '/de/', @query
+    last_response.should be_ok
+
+    bmf_exists, fgs_exists = false
+    Nokogiri::HTML(last_response.body).css('span.service').each do |line|
+      bmf_exists = true if line.text.strip.downcase == 'bessermitfahren.de'
+      fgs_exists = true if line.text.strip.downcase == 'fahrgemeinschaft.de'
+    end
+
+    bmf_exists.should be_true
+    fgs_exists.should be_true
+  end
+
 end

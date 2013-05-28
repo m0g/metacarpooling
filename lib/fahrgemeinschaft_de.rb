@@ -118,11 +118,9 @@ class FahrgemeinschaftDe < Search
       if trip['class'].nil? and not trip.at_css('td:nth-child(4)')
         date_string = trip.css('td').text.scan(/[0-9\.]+/i).first
         nil
-      elsif(
-        trip['class'] == 'trTrip' and trip.css('td:nth-child(3)').text.index(',')
-      )
+      elsif trip['class'] == 'trTrip'
         if trip.at_css('td:nth-child(8) a img')\
-          and trip.css('td:nth-child(8) a img').first['src'] != '/gfx/ico/db.png'
+          and trip.css('td:nth-child(8) a img').first['src'] == '/gfx/ico/db.png'
           nil
         else
           result trip, date_string

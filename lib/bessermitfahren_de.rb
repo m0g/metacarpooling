@@ -74,7 +74,7 @@ class BessermitfahrenDe < Search
     end
 
     @from_city_id = get_city_id(@from_country, @from_city)
-    @ti_city_id = get_city_id(@to_country, @to_city)
+    @to_city_id = get_city_id(@to_country, @to_city)
 
     return nil if @from_city_id.nil? or @to_city_id.nil?
 
