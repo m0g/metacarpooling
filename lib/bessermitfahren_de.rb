@@ -54,7 +54,6 @@ class BessermitfahrenDe < Search
 
   def result trip
     Result.new(
-      username: 'Unknown',
       price: trip.css('span.price').text,
       date: date(trip),
       places: trip.css('span.people').text.scan(/[0-9]+/i).first.to_i,
