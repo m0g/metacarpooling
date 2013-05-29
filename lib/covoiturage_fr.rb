@@ -89,6 +89,8 @@ class CovoiturageFr < Search
 
     if date_string.downcase == 'demain'
       date_string = (Date.today + 1).strftime('%d %B')
+    elsif date_string.downcase == 'aujourd\'hui'
+      date_string = Date.today.strftime('%d %B')
     else
       date_string[0..7] = ''
       day_string, month_string = date_string.split ' '

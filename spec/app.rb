@@ -54,6 +54,13 @@ describe "Metacarpooling App" do
     last_response.body.should be_empty
   end
 
+  it "should returns results with today's date" do
+    @query[:search][:when][:date] = Date.today.strftime '%d-%m-%Y'
+
+    get '/en/', @query
+    last_response.body.should be_true
+  end
+
   it "Should return an error when random symbol are inserted in the city name" do
     @query[:search][:from][:city] = 'Be^rlùù*n'
 
@@ -111,5 +118,6 @@ describe "Metacarpooling App" do
     bmf_exists.should be_true
     fgs_exists.should be_true
   end
+
 
 end

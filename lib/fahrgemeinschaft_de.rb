@@ -84,11 +84,18 @@ class FahrgemeinschaftDe < Search
     if trip.css('td:nth-child(5)').text.empty?
       time_string = '00:00'
     else
-      time_string = trip.css('td:nth-child(5)').text
+      time_string = trip.css('td:nth-child(5)').text.scan /^\d{2}:\d{2}/i
     end
 
+    time_string = '00:00' if time_string.empty?
+
     date_string = [ date_string, time_string ].join ' '
-    DateTime.strptime date_string, '%d.%m.%Y %H:%M'
+
+    begin
+      DateTime.strptime date_string, '%d.%m.%Y %H:%M'
+    rescue
+      raise time_string.inspect
+    end
   end
 
   def result trip, date_string
@@ -97,8 +104,8 @@ class FahrgemeinschaftDe < Search
       service: Unicode::capitalize(service),
       date: date(trip, date_string),
       places: trip.css('td:nth-child(7)').text.to_i,
-      from: trip.css('td:nth-child(1)').text.split(', ').first.strip,
-      to: trip.css('td:nth-child(3)').text.split(', ').first.strip,
+      from: trip.css('td:nth-child(1)').text.strip,
+      to: trip.css('td:nth-child(3)').text.strip,
       link: link(trip),
       booking: false
     )

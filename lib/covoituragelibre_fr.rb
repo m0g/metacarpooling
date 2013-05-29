@@ -113,6 +113,7 @@ class CovoituragelibreFr < Search
     redirection = res.header['location']
 
     html = Nokogiri::HTML(open("http://www.covoiturage-libre.fr/#{redirection}", "Cookie" => cookie))
+    #raise html.css('h1').inspect
     html.css('table.annonce tr').map do |trip|
       if trip.at_css 'td.vert'
         result trip
