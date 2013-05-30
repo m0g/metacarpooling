@@ -1,13 +1,8 @@
-GIT
-  remote: git://github.com/gitlabhq/grit.git
-  revision: 28ba79cbf65eab76358bb8519852a59aa7c2883f
-  specs:
-
 GEM
   remote: https://rubygems.org/
   specs:
-    addressable (2.3.3)
-    backports (3.3.0)
+    addressable (2.3.4)
+    backports (3.3.1)
     daemons (1.1.9)
     dandelion (0.3.11)
       grit (>= 2.4.1)
@@ -25,24 +20,22 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.23)
     multi_json (1.7.3)
-    net-sftp (2.1.2)
-      net-ssh (>= 2.6.5)
-    net-ssh (2.6.7)
     nokogiri (1.5.9)
     polyglot (0.3.3)
     pony (1.4.1)
       mail (> 2.0)
     posix-spawn (0.3.6)
-    r18n-core (1.1.4)
+    r18n-core (1.1.5)
     rack (1.5.2)
     rack-flash3 (1.0.3)
+      rack
       rack
     rack-protection (1.5.0)
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
     rake (10.0.4)
-    rdiscount (2.0.7.3)
+    rdiscount (2.1.6)
     rspec (2.13.0)
       rspec-core (~> 2.13.0)
       rspec-expectations (~> 2.13.0)
@@ -57,7 +50,7 @@ GEM
       rack (~> 1.5, >= 1.5.2)
       rack-protection (~> 1.4)
       tilt (~> 1.3, >= 1.3.4)
-    sinatra-assetpack (0.2.2)
+    sinatra-assetpack (0.2.3)
       backports
       jsmin
       rack-test
@@ -70,15 +63,15 @@ GEM
       rack-test
       sinatra (~> 1.4.2)
       tilt (~> 1.3)
-    sinatra-r18n (1.1.4)
-      r18n-core (= 1.1.4)
+    sinatra-r18n (1.1.5)
+      r18n-core (= 1.1.5)
       sinatra (>= 1.3)
     text (1.2.1)
     thin (1.5.1)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
       rack (>= 1.0.0)
-    tilt (1.3.6)
+    tilt (1.4.1)
     treetop (1.4.12)
       polyglot
       polyglot (>= 0.3.1)
@@ -93,7 +86,6 @@ PLATFORMS
 DEPENDENCIES
   addressable
   dandelion
-  grit!
   net-sftp
   nokogiri
   pony
@@ -104,7 +96,7 @@ DEPENDENCIES
   rspec
   shotgun
   sinatra
-  sinatra-assetpack
+  sinatra-assetpack (~> 0.2.2)
   sinatra-contrib
   sinatra-r18n
   text

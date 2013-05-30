@@ -47,9 +47,11 @@ class Search
     end
   end
 
-  def get_country_code country
-    AVAILABLE_COUNTRIES.each do |available_country|
-      return available_country.code.upcase if available_country == country.downcase
+  def get_country_code country_name
+    COUNTRIES.each do |country|
+      if country['name'] == country_name.downcase
+        return country['code'].upcase
+      end
     end
 
     nil

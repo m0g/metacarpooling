@@ -86,7 +86,7 @@ describe "Metacarpooling App" do
     end
   end
 
-  it "Should return in blablacar.com for Paris Lyon trip" do
+  it "Should return in blablacar.com for Lyon Paris trip" do
     @query[:search][:from] = { country: 'france', city: 'Lyon', radius: '1' }
     @query[:search][:to] = { country: 'france', city: 'Paris', radius: '1' }
 

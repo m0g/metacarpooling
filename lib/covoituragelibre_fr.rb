@@ -1,9 +1,9 @@
 class CovoituragelibreFr < Search
-  def get_city_id city, url
+  def get_city_id city, country_code, url
     uri = Addressable::URI.new
     uri.query_values = {
       COMMUNE: city,
-      PAYS: 'FR'
+      PAYS: country_code
     }
 
     query_string = [
@@ -20,18 +20,18 @@ class CovoituragelibreFr < Search
   end
 
   def get_from_city_id
-    get_city_id @from_city, 'depart'
+    get_city_id @from_city, @from_country_code, 'depart'
   end
 
   def get_to_city_id
-    get_city_id @to_city, 'arrivee'
+    get_city_id @to_city, @to_country_code, 'arrivee'
   end
 
   def post_params
     uri = Addressable::URI.new
     uri.query_values = {
-      PAYS_DEPART: get_country_code(@from_country),
-      PAYS_ARRIVEE: get_country_code(@to_country),
+      PAYS_DEPART: @from_country_code,
+      PAYS_ARRIVEE: @to_country_code,
       DEPART: @from_city,
       DEPART_LAT: @from_lat,
       DEPART_LON: @from_lng,
@@ -67,7 +67,7 @@ class CovoituragelibreFr < Search
   end
 
   def date trip
-    date_string, time_string = trip.css('td:nth-child(2) p.gros2').text.strip.split(' - ')
+    date_string, time_string = trip.css('td[width="450"] p.gros2').text.strip.split(' - ')
     date_string = date_string.scan(/[0-9]{2}\s[a-zA-Z]+\s[0-9]{4}/i).first
 
     day, month, year = date_string.split ' '
@@ -78,13 +78,14 @@ class CovoituragelibreFr < Search
   end
 
   def result trip
-    from, to = trip.css('td:nth-child(2) p:first-child').text.split('→')
+    from, to = trip.xpath('./tr/td[2]/p[1]').text.split('→')
 
     Result.new(
-      username: trip.css('td:first-child tr:first-child td:last-child').text,
+      username: trip.css('td[width="300"]').first
+                    .xpath('./table/tr[1]/td[3]').text,
       price: trip.css('td.vert span.gros strong').text,
       date: date(trip),
-      places: trip.css('td:first-child tr:nth-child(2) td:last-child strong').text.to_i,
+      places: trip.xpath('./tr/td[1]/table/tr[2]/td[2]/strong').text.to_i,
       service: 'covoiturage-libre.fr',
       from: from,
       to: to,
@@ -100,7 +101,10 @@ class CovoituragelibreFr < Search
       @when_date = Date.strptime(@when_date, '%d-%m-%Y')
     end
 
-    @from_lat, @from_lng =  get_from_city_id()
+    @from_country_code = get_country_code @from_country
+    @to_country_code = get_country_code @to_country
+
+    @from_lat, @from_lng = get_from_city_id()
     @to_lat, @to_lng =  get_to_city_id()
 
     @token, cookie = get_token_and_cookie
@@ -112,10 +116,13 @@ class CovoituragelibreFr < Search
     res = http.post '/recherche.php', post_params, headers
     redirection = res.header['location']
 
-    html = Nokogiri::HTML(open("http://www.covoiturage-libre.fr/#{redirection}", "Cookie" => cookie))
-    #raise html.css('h1').inspect
-    html.css('table.annonce tr').map do |trip|
-      if trip.at_css 'td.vert'
+    html = Nokogiri::HTML(open(
+      "http://www.covoiturage-libre.fr/#{redirection}",
+      "Cookie" => cookie
+    ))
+
+    html.css('table.annonce').map do |trip|
+      if trip.at_css 'tr td.vert'
         result trip
       else
         nil
