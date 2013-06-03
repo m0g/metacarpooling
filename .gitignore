@@ -1,5 +1,6 @@
 *.swp
 *.swo
+*.swn
 *.old
 data/
 config.yml
