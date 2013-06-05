@@ -56,4 +56,11 @@ class Search
 
     nil
   end
+
+  def set_lat_lng lat_lng
+    @from_lat = lat_lng[0][0]
+    @from_lng = lat_lng[0][1]
+    @to_lat = lat_lng[1][0]
+    @to_lng = lat_lng[1][1]
+  end
 end

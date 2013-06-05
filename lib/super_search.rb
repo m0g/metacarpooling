@@ -2,8 +2,8 @@ class SuperSearch
   ENGINES = [ 'CovoiturageFr', 'BessermitfahrenDe', 
               #'MitfahrzentraleDe',
               #'MitfahrgelegenheitDe',
-              'FahrgemeinschaftDe', 
-              'CovoituragelibreFr'  ]
+              'MifazDe',
+              'FahrgemeinschaftDe', 'CovoituragelibreFr'  ]
 
   def order_by_date
     @results.sort do |x, y|
@@ -37,8 +37,22 @@ class SuperSearch
     @results.first.validate_fields
   end
 
+  def get_lat_lng result
+    from = Geocoding.get_city_lat_lng result.from_country, result.from_city
+    to = Geocoding.get_city_lat_lng result.to_country, result.to_city
+
+    if not from.nil? and not to.nil?
+      [ from, to ]
+    else
+      nil
+    end
+  end
+
   def process
+    lat_lng = get_lat_lng @results.first
+
     @results = @results.map do |result|
+      result.set_lat_lng(lat_lng) unless lat_lng.nil?
       result.process
     end.compact.flatten
 

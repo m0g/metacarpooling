@@ -15,20 +15,26 @@ require 'pony'
 require 'sinatra/base'
 require 'sinatra/assetpack'
 
+# Core
 require_relative 'lib/result.rb'
 require_relative 'lib/search.rb'
 require_relative 'lib/super_search.rb'
-require_relative 'lib/dates_international.rb'
 require_relative 'lib/feedback.rb'
-require_relative 'lib/recaptcha.rb'
+
+# Helpers
+require_relative 'lib/helpers/dates_international.rb'
+require_relative 'lib/helpers/recaptcha.rb'
+require_relative 'lib/helpers/translate.rb'
+require_relative 'lib/helpers/geocoding.rb'
 
 # Search engines
-require_relative 'lib/covoiturage_fr.rb'
-require_relative 'lib/mitfahrgelegenheit_de.rb'
-require_relative 'lib/bessermitfahren_de.rb'
-require_relative 'lib/mitfahrzentrale_de.rb'
-require_relative 'lib/fahrgemeinschaft_de.rb'
-require_relative 'lib/covoituragelibre_fr.rb'
+require_relative 'lib/engines/covoiturage_fr.rb'
+require_relative 'lib/engines/mitfahrgelegenheit_de.rb'
+require_relative 'lib/engines/bessermitfahren_de.rb'
+require_relative 'lib/engines/mitfahrzentrale_de.rb'
+require_relative 'lib/engines/fahrgemeinschaft_de.rb'
+require_relative 'lib/engines/covoituragelibre_fr.rb'
+require_relative 'lib/engines/mifaz_de.rb'
 
 class Metacarpooling < Sinatra::Base
   set :root, File.dirname(__FILE__)
@@ -83,8 +89,6 @@ get '/' do
 end
 
 get '/:locale/' do
-  #raise ENV['RACK_ENV'].inspect
-
   unless R18n.available_locales.any? {|locale| locale.code == params[:locale] }
     if session.has_key? :locale
       redirect "/#{session[:locale]}/"
