@@ -3,8 +3,6 @@ class MifazDe < Search
     uri = Addressable::URI.new
     uri.query_values = {
       f: 'getEntries',
-      #startloc: @from_city.downcase,
-      #goalloc: @to_city.downcase,
       startlatitude: @from_lat,
       startlongitude: @from_lng,
       goallatitude: @to_lat,
@@ -63,8 +61,6 @@ class MifazDe < Search
     end
 
     JSON.parse(open(query).read)['entries'].map do |trip|
-      #raise trip.inspect
-      #raise result(trip).inspect
       result trip
     end
   end

@@ -50,7 +50,8 @@
         </div>
         <div class="row-fluid">
           <input id="when-date" type="text" placeholder="<%=t.content.date %>"
-                 name="search[when][date]" class="span5 offset2"/>
+                 name="search[when][date]" class="span5 offset2"
+                 value="<%=Date.today.strftime '%d-%m-%Y' %>"/>
           <select name="search[when][margin]" class="span5">
             <option value=""><%=t.content.margin %></option>
             <option value="1">+/-1 <%=t.content.day %></option>
