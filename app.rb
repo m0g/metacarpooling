@@ -88,6 +88,10 @@ get '/' do
   end
 end
 
+get '/:locale' do
+  redirect "/:locale/"
+end
+
 get '/:locale/' do
   unless R18n.available_locales.any? {|locale| locale.code == params[:locale] }
     if session.has_key? :locale

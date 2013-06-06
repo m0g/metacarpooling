@@ -21,9 +21,6 @@ class FahrgemeinschaftDe < Search
     from_country_de = fgs_de.t.countries.send @from_country
     to_country_de = fgs_de.t.countries.send @to_country
 
-    #from_lat, from_lng = get_city_lat_lng @from_country, @from_city
-    #to_lat, to_lng = get_city_lat_lng @to_country, @to_city
-
     origin = {
       PlaceID: "null",
       Address: [ @from_city, from_country_de ].join(', '),

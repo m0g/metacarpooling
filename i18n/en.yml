@@ -22,6 +22,7 @@ feedback:
     hello: I just want to say hello
 
 content:
+  results: results
   country: Country
   city: City
   radius: Radius

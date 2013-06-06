@@ -21,6 +21,7 @@ feedback:
     hello: Je veux juste dire bonjour
 
 content:
+  results: résultats
   country: Pays
   city: Ville
   radius: Détour

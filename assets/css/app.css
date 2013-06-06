@@ -13,11 +13,12 @@ div.navbar-fixed-top div.pull-right {
   #main-content { margin-top: 0 }
 }
 
-div.price {
+div.price, p.nb-results {
   color: #F53D68;
   font-weight: bold;
   font-size: 22px;
 }
+p.nb-results { font-weight: normal }
 
 div.date {
   font-weight: bold;

@@ -22,6 +22,7 @@ feedback:
     hello: Ich wollte nür hallo sagen
 
 content:
+  results: Ergebnisse
   country: Land
   city: Stadt
   radius: Umkreis
