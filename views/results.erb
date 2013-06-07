@@ -5,7 +5,7 @@
         <%=t.content.to.downcase %>&nbsp;<%= search[:to][:city] %>
       </h1>
       <h2>
-        <%= date.strftime('%A %d %B %Y') %>
+        <%=translated_date(date) %>
       </h2>
       <p class="nb-results pull-right">
         <%=results.count %>&nbsp;<%=t.content.results %>

@@ -18,7 +18,7 @@
         <%= search[:from][:city] %>
         <%=t.content.to.downcase %>&nbsp;<%= search[:to][:city] %>
         &nbsp;|&nbsp;
-        <%= date.strftime('%A %d %B %Y') %>
+        <%=translated_date(date) %>
       </title>
     <% else %>
       <title>Metacarpooling</title>

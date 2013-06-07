@@ -51,6 +51,29 @@ content:
   subject: Subject
   message_has_been_sent: Message has been sent
 
+date:
+  day:
+    monday: Monday
+    tuesday: Tuesday
+    wednesday: Wednesday
+    thursday: Thursday
+    friday: Friday
+    saturday: Saturday
+    sunday: Sunday
+  month:
+    january: January
+    february: February
+    march: March
+    april: April
+    may: May
+    june: June
+    july: July
+    august: August
+    september: September
+    october: October
+    november: November
+    december: December
+
 errors:
   name:
     empty: Name can't be empty

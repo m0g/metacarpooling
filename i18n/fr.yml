@@ -49,6 +49,29 @@ content:
   subject: Sujet
   message_has_been_sent: Votre message à bien été envoyé
 
+date:
+  day:
+    monday: Lundi
+    tuesday: Mardi
+    wednesday: Mercredi
+    thursday: Jeudi
+    friday: Vendredi
+    saturday: Samedi
+    sunday: Dimanche
+  month:
+    january: Janvier
+    february: Février
+    march: Mars
+    april: Avril
+    may: Mai
+    june: Juin
+    july: Juillet
+    august: Août
+    september: Septembre
+    october: Octobre
+    november: Novembre
+    december: Décembre
+
 errors:
   name:
     empty: Le nom ne peut être vide

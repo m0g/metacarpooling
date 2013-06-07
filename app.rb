@@ -78,6 +78,17 @@ AVAILABLE_COUNTRIES = settings.available_countries
 RECAPTCHA = settings.recaptcha
 GOOGLE_ANALYTICS = settings.google_analytics
 
+helpers do
+  def translated_date date
+    [
+      t.date.day.send(date.strftime('%A').downcase),
+      date.strftime('%d'),
+      t.date.month.send(date.strftime('%B').downcase),
+      date.strftime('%Y')
+    ].join ' '
+  end
+end
+
 get '/' do
   if session[:locale]
     redirect "/#{session[:locale]}/"
