@@ -56,6 +56,8 @@ class FahrgemeinschaftDe < Search
       selDateMonth: @when_date.strftime('%m'),
       selDateYear: @when_date.strftime('%Y'),
       edtOrigin: origin,
+      selTolerance: 1,
+      btnSend: "Fahrten suchen",
       edtDestination: destination
     }
 

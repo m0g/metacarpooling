@@ -67,12 +67,6 @@
       });
 
       $('#from-country, #to-country').change(Form.countryChange);
-
-      $("input").change(function() {
-        console.log('hello');
-        var inputs = $(this).closest('form').find(':input');
-        inputs.eq( inputs.index(this)+ 1 ).focus();
-      });
     },
 
     disableCityInputs: function() {
