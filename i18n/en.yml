@@ -91,3 +91,7 @@ engines:
 
 other:
   trip: trip
+
+terms_and_conditions:
+  link: terms_and_conditions
+  title: Terms and conditions

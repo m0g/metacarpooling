@@ -1,6 +1,7 @@
 *.swp
 *.swo
 *.swn
+*.swm
 *.old
 data/
 config.yml

@@ -90,3 +90,6 @@ engines:
 other:
   trip: trajet
 
+terms_and_conditions:
+  link: mentions_legales
+  title: Mentions légales

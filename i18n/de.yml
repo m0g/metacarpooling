@@ -90,3 +90,7 @@ engines:
 
 other:
   trip: fahrt
+
+terms_and_conditions:
+  link: impressum
+  title: Impressum

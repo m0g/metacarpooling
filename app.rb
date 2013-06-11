@@ -166,6 +166,24 @@ post '/:locale/feedback' do
   json.to_json
 end
 
+get '/en/terms_and_conditions' do
+  erb :terms, locals: {
+    markdown: RDiscount.new(File.open('content/terms_and_conditions.md', 'r').read).to_html
+  }
+end
+
+get '/de/impressum' do
+  erb :terms, locals: {
+    markdown: RDiscount.new(File.open('content/impressum.md', 'r').read).to_html
+  }
+end
+
+get '/fr/mentions_legales' do
+  erb :terms, locals: {
+    markdown: RDiscount.new(File.open('content/mentions_legales.md', 'r').read).to_html
+  }
+end
+
 not_found do
   status 404
   erb :not_found
