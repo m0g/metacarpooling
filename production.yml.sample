@@ -1,0 +1,14 @@
+# Required
+scheme: sftp
+host: your_host.com
+username: your_user
+password: your_pass
+
+# Optional
+path: production
+exclude:
+    - .gitignore
+    - dandelion.yml
+    - production.yml
+    - .rvmrc
+revision_file: .revision

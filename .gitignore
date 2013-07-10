@@ -8,3 +8,5 @@ config.yml
 public/assets/
 public/js/
 public/css/
+dandelion.yml
+production.yml
