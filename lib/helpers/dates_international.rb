@@ -33,6 +33,16 @@ class Date
   MONTH_TRANSLATIONS.merge! make_hash(%w/gennaio	febbraio	marzo	aprile	maggio	giugno	luglio	agosto	settembre	ottobre	novembre	dicembre/)  # Italian
   MONTH_TRANSLATIONS.merge! make_hash(%w/enero	febrero	marzo	abril	mayo	junio	julio	agosto	septiembre	octubre	noviembre	diciembre/) # Spanish
 
+  def self.month_shorten_to_english(string)
+    month_from = string[/[^\s\d,]+/i]      # Search for a month name
+    if month_from
+      month_from = MONTH_TRANSLATIONS.keys.detect{ |k| k.to_s =~ /^#{month_from.downcase}/ }
+      month_to = MONTH_TRANSLATIONS[month_from.downcase]      # Look up the translation
+      return month_to.to_s if month_to
+    end
+    return string
+  end
+
   def self.month_to_english(string)
     month_from = string[/[^\s\d,]+/i]      # Search for a month name
     if month_from

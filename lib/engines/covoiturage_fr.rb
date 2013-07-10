@@ -94,7 +94,13 @@ class CovoiturageFr < Search
     else
       date_string[0..7] = ''
       day_string, month_string = date_string.split ' '
-      month_string = Date.month_to_english(month_string)
+
+      if month_string.index '.'
+        month_string = Date.month_shorten_to_english(month_string[0..-1])
+      else
+        month_string = Date.month_to_english(month_string)
+      end
+
       date_string = [ day_string, month_string ].join ' '
     end
 
