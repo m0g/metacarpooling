@@ -1,4 +1,4 @@
-metacarpooling
+Metacarpooling
 ==============
 
 Metacarpooling is an open source meta search engine for carpooling opportunities.
