@@ -10,7 +10,7 @@ div.navbar-fixed-top div.pull-right {
   min-height: 100%;
 }
 
-#main-content { padding-top: 50px; }
+#main-content { padding: 50px 0 40px; }
 
 @media (max-width: 979px){
   #main-content {
