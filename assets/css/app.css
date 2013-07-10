@@ -13,7 +13,10 @@ div.navbar-fixed-top div.pull-right {
 #main-content { padding-top: 50px; }
 
 @media (max-width: 979px){
-  #main-content { margin-top: 0 }
+  #main-content {
+    margin-top: 0;
+    padding-top: 0;
+  }
 }
 
 div.price, p.nb-results {
