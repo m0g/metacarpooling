@@ -10,8 +10,8 @@ require 'text'
 
 require_relative 'lib/result.rb'
 require_relative 'lib/search.rb'
-require_relative 'lib/mitfahrgelegenheit_de.rb'
-require_relative 'lib/mitfahrzentrale_de.rb'
+require_relative 'lib/engines/mitfahrgelegenheit_de.rb'
+require_relative 'lib/engines/mitfahrzentrale_de.rb'
 
 MitfahrzentraleDe::get_countries
 MitfahrgelegenheitDe::get_countries

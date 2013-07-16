@@ -64,15 +64,15 @@ class MitfahrgelegenheitDe < Search
     uri.query_values = query_values
 
     [
-      'http://www.',
-      service,
+      'http://',
+      MFG_SECRET,
       '/searches/search_abroad?',
       uri.query
     ].join ''
   end
 
   def booking trip
-    if trip.at_css('td.column-8 span.sprite_icons-icon_table_booking')
+    if trip.at_css('td.column-8 span.icon_booking')
       true
     else
       false
@@ -93,25 +93,23 @@ class MitfahrgelegenheitDe < Search
 
   def date trip
     date_string = [
-      trip.css('td.column-4').text.split(',')[1],
-      trip.css('td.column-5').text
+      trip.css('td.column-3').text,
+      trip.css('td.column-4').text
     ].join(' ').strip
-    date_string[0] = ''
 
-    if trip.css('td.column-5').text.empty?
-      date_string << ' 00.00 Uhr' if @locale.get.locale.code == 'de'
-      date_string << ' 12:00 AM' if @locale.get.locale.code == 'en'
+    if trip.css('td.column-4').text.empty?
+      date_string << ' 00.00 Uhr'
     end
 
-    DateTime.strptime(date_string, DATE_FORMAT[@locale.get.locale.code])
+    DateTime.strptime(date_string, DATE_FORMAT['de'])
   end
 
   def result trip
     Result.new(
-      price: trip.css('td.column-6').text,
+      price: trip.css('td.column-6').text.gsub(/\sEUR$/i, ' €'),
       date: date(trip),
       service: Unicode::capitalize(service),
-      places: trip.css('td.column-7').text.scan(/[0-9]/i).first.to_i,
+      places: trip.css('td.column-5').text.to_i,
       from: trip.css('td.column-2').text.gsub(/\s\(.*\)/i, ''),
       to: trip.css('td.column-3').text.gsub(/\s\(.*\)/i, ''),
       link: link(trip),
@@ -120,11 +118,7 @@ class MitfahrgelegenheitDe < Search
   end
 
   def process
-    booking_el = 'td.column-8 span.sprite_icons-icon_table_booking'
-    bahn_el = 'td.column-8 span.sprite_icons-bahn_small'
-    bus_el = 'td.column-8 img[title="Kooperationspartner"]'
-    bus_el_en = 'td.column-8 img[title="Cooperations partner"]'
-    bus_el_fr = 'td.column-8 img[title="Partenaire"]'
+    booking_el = 'td.column-8 span.icon_booking'
 
     begin
       @when_date.strftime('%d.%m.%Y')
@@ -140,10 +134,9 @@ class MitfahrgelegenheitDe < Search
     return nil if @from_city_id.nil? or @to_city_id.nil?
 
     html = Nokogiri::HTML(open(query))
-    html.css('table.lift_list tr.link_hover').map do |trip|
-      if trip.at_css bahn_el, bus_el, bus_el_en, bus_el_fr
-        nil
-      elsif not trip.at_css(booking_el) and @booking != 'yes'
+
+    html.css('table.list tr.odd, table.list tr.even').map do |trip|
+      if not trip.at_css(booking_el) and @booking != 'yes'
         result trip
       elsif trip.at_css(booking_el) and @booking != 'no'
         result trip

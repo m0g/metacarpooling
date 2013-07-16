@@ -1,7 +1,7 @@
 class SuperSearch
   ENGINES = [ 'CovoiturageFr', 'BessermitfahrenDe', 
               #'MitfahrzentraleDe',
-              #'MitfahrgelegenheitDe',
+              'MitfahrgelegenheitDe',
               'MifazDe',
               'FahrgemeinschaftDe', 'CovoituragelibreFr'  ]
 

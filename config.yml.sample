@@ -32,3 +32,5 @@ recaptcha:
   private_key: YOUR PRIVATE KEY
 
 google_analytics: GOOGLE ANALYTICS CODE
+
+mfg_secret: MFG SECRET

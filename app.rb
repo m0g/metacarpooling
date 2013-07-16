@@ -77,6 +77,7 @@ COUNTRIES = settings.countries
 AVAILABLE_COUNTRIES = settings.available_countries
 RECAPTCHA = settings.recaptcha
 GOOGLE_ANALYTICS = settings.google_analytics
+MFG_SECRET = settings.mfg_secret
 
 helpers do
   def translated_date date
