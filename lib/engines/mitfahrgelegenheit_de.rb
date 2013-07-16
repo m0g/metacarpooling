@@ -37,9 +37,14 @@ class MitfahrgelegenheitDe < Search
   def get_city_id country_id, city
     white = Text::WhiteSimilarity.new
 
-    JSON.parse(open(
-      "http://www.#{service}/lifts/getCities/#{country_id}"
-    ).read).each do |el|
+    uri = URI "http://www.#{service}"
+    res = nil
+
+    Net::HTTP.SOCKSProxy('127.0.0.1', 9050).start(uri.host, uri.port) do |http|
+      res = http.get "/lifts/getCities/#{country_id}"
+    end
+
+    JSON.parse(res.body).each do |el|
       return el[1] if white.similarity(el[0].downcase, city.downcase) > 0.8
     end
     nil
