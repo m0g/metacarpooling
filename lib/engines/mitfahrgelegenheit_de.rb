@@ -64,8 +64,8 @@ class MitfahrgelegenheitDe < Search
     uri.query_values = query_values
 
     [
-      'http://',
-      MFG_SECRET,
+      #'http://',
+      #MFG_SECRET,
       '/searches/search_abroad?',
       uri.query
     ].join ''
@@ -133,7 +133,14 @@ class MitfahrgelegenheitDe < Search
 
     return nil if @from_city_id.nil? or @to_city_id.nil?
 
-    html = Nokogiri::HTML(open(query))
+    uri = URI "http://#{MFG_SECRET}"
+    res = nil
+
+    Net::HTTP.SOCKSProxy('127.0.0.1', 9050).start(uri.host, uri.port) do |http|
+      res = http.get query
+    end
+
+    html = Nokogiri::HTML res.body
 
     html.css('table.list tr.odd, table.list tr.even').map do |trip|
       if not trip.at_css(booking_el) and @booking != 'yes'

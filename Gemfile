@@ -12,10 +12,13 @@ gem 'rack-flash3'
 gem 'sinatra-contrib'
 gem 'rdiscount'
 gem 'pony'
-#gem 'sinatra-assetpack', :require => 'sinatra/assetpack'
 gem 'sinatra-assetpack', '~> 0.2.2'
 gem 'rake'
 gem 'uglifier'
+#gem 'tor'
+#gem 'tor_requests', git: 'git@github.com:brunogh/tor_requests.git'
+gem 'socksify'
+
 
 group :development do
   gem 'dandelion'

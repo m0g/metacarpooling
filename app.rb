@@ -14,6 +14,7 @@ require 'rdiscount'
 require 'pony'
 require 'sinatra/base'
 require 'sinatra/assetpack'
+require 'socksify/http'
 
 # Core
 require_relative 'lib/result.rb'
