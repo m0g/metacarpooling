@@ -37,14 +37,9 @@ class MitfahrgelegenheitDe < Search
   def get_city_id country_id, city
     white = Text::WhiteSimilarity.new
 
-    uri = URI "http://www.#{service}"
-    res = nil
-
-    Net::HTTP.SOCKSProxy('127.0.0.1', 9050).start(uri.host, uri.port) do |http|
-      res = http.get "/lifts/getCities/#{country_id}"
-    end
-
-    JSON.parse(res.body).each do |el|
+    JSON.parse(open(
+      "http://www.#{service}/lifts/getCities/#{country_id}"
+    ).read).each do |el|
       return el[1] if white.similarity(el[0].downcase, city.downcase) > 0.8
     end
     nil
@@ -69,8 +64,8 @@ class MitfahrgelegenheitDe < Search
     uri.query_values = query_values
 
     [
-      #'http://',
-      #MFG_SECRET,
+      'http://',
+      MFG_SECRET,
       '/searches/search_abroad?',
       uri.query
     ].join ''
@@ -138,14 +133,7 @@ class MitfahrgelegenheitDe < Search
 
     return nil if @from_city_id.nil? or @to_city_id.nil?
 
-    uri = URI "http://#{MFG_SECRET}"
-    res = nil
-
-    Net::HTTP.SOCKSProxy('127.0.0.1', 9050).start(uri.host, uri.port) do |http|
-      res = http.get query
-    end
-
-    html = Nokogiri::HTML res.body
+    html = Nokogiri::HTML(open(query))
 
     html.css('table.list tr.odd, table.list tr.even').map do |trip|
       if not trip.at_css(booking_el) and @booking != 'yes'

@@ -153,5 +153,12 @@ describe "Metacarpooling App" do
     mifaz_exists.should be_true
   end
 
+  it "Should return results with Erfurt" do
+    @query[:search][:from] = { country: 'germany', city: 'Berlin', radius: '1' }
+    @query[:search][:to] = { country: 'germany', city: 'Erfurt', radius: '1' }
+
+    get '/de/', @query
+    last_response.should be_ok
+  end
 
 end

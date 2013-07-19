@@ -7,7 +7,7 @@ It is based on Ruby/Sinatra for the back-end and uses both Twitter Bootstrap & j
 The currently supported services are:
 
 - bessermitfahren.de
-- mitfahrgelegenheit.de / carpooling.com
+- mitfahrgelegenheit.de / carpooling.com (Metacarpooling IP has been blacklisted)
 - covoituragelibre.fr
 - covoiturage.fr / blablacar.com
 - fahrgemeinschaft.de

@@ -34,3 +34,12 @@ recaptcha:
 google_analytics: GOOGLE ANALYTICS CODE
 
 mfg_secret: MFG SECRET
+
+enabled_engines:
+  - CovoiturageFr
+  - BessermitfahrenDe
+  - MifazDe
+  - FahrgemeinschaftDe
+  - CovoituragelibreFr
+  - MitfahrzentraleDe
+  - MitfahrgelegenheitDe

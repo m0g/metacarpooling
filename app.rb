@@ -14,7 +14,6 @@ require 'rdiscount'
 require 'pony'
 require 'sinatra/base'
 require 'sinatra/assetpack'
-require 'socksify/http'
 
 # Core
 require_relative 'lib/result.rb'
@@ -64,7 +63,6 @@ class Metacarpooling < Sinatra::Base
   }
 end
 
-#enable :sessions
 use Rack::Session::Cookie, :key => 'rack.session',
                            :domain => 'metacarpooling.com',
                            :path => '/',
@@ -79,6 +77,7 @@ AVAILABLE_COUNTRIES = settings.available_countries
 RECAPTCHA = settings.recaptcha
 GOOGLE_ANALYTICS = settings.google_analytics
 MFG_SECRET = settings.mfg_secret
+ENGINES = settings.enabled_engines
 
 helpers do
   def translated_date date
