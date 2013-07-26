@@ -35,6 +35,7 @@ require_relative 'lib/engines/mitfahrzentrale_de.rb'
 require_relative 'lib/engines/fahrgemeinschaft_de.rb'
 require_relative 'lib/engines/covoituragelibre_fr.rb'
 require_relative 'lib/engines/mifaz_de.rb'
+require_relative 'lib/engines/drive2day_de.rb'
 
 class Metacarpooling < Sinatra::Base
   set :root, File.dirname(__FILE__)
@@ -118,6 +119,8 @@ get '/:locale/' do
   unless params.has_key? 'search'
     erb :index
   else
+    #raise Drive2dayDe.new(params[:search]).process.inspect
+
     super_search = SuperSearch.new params[:search]
 
     if super_search.validate_fields

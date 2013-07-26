@@ -53,7 +53,7 @@
                  name="search[when][date]" class="span5 offset2"
                  value="<%=Date.today.strftime '%d-%m-%Y' %>"/>
           <select name="search[when][margin]" class="span5">
-            <option value=""><%=t.content.margin %></option>
+            <option value="0"><%=t.content.margin %></option>
             <option value="1">+/-1 <%=t.content.day %></option>
             <option value="2">+/-2 <%=t.content.days %></option>
             <option value="3">+/-3 <%=t.content.days %></option>

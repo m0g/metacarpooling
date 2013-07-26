@@ -86,6 +86,7 @@ errors:
 engines:
   mitfahrgelegenheit: carpooling.fr
   covoituragefr: covoiturage.fr
+  drive2dayde: drive2day.com
 
 other:
   trip: trajet

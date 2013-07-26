@@ -87,6 +87,7 @@ errors:
 engines:
   mitfahrgelegenheit: mitfahrgelegenheit.de
   covoituragefr: blablacar.de
+  drive2dayde: drive2day.de
 
 other:
   trip: fahrt
