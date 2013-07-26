@@ -5,7 +5,7 @@ class Drive2dayDe < Search
   }
 
   def self.get_countries
-    html = Nokogiri::HTML(open("http://www.#{service}"))
+    html = Nokogiri::HTML(open("http://www.drive2day.de"))
 
     list_countries = html.css('#search_action_country_from_id option').map do |option|
       { id: option['value'], name: option.text }
