@@ -8,7 +8,7 @@ describe "Metacarpooling App" do
       to: { country: 'germany', city: 'Leipzig', radius: '1' },
       when: {
         date: (Date.today + 1).strftime('%d-%m-%Y'),
-        margin: ''
+        margin: 0
       },
       booking: 'both'
     }}
@@ -161,4 +161,11 @@ describe "Metacarpooling App" do
     last_response.should be_ok
   end
 
+  it "Should return results with wrong city name" do
+    @query[:search][:from] = { country: 'germany', city: 'Berlin', radius: '1' }
+    @query[:search][:to] = { country: 'germany', city: 'Munchen', radius: '1' }
+
+    get '/en/', @query
+    last_response.should be_ok
+  end
 end

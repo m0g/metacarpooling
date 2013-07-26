@@ -15,5 +15,4 @@ require_relative 'lib/engines/mitfahrzentrale_de.rb'
 require_relative 'lib/engines/drive2day_de.rb'
 
 MitfahrzentraleDe::get_countries
-#MitfahrgelegenheitDe::get_countries
 Drive2dayDe::get_countries

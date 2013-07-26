@@ -58,9 +58,6 @@ class Drive2dayDe < Search
     uri = Addressable::URI.new
     uri.query_values = {
       utf8: '✓',
-      #authenticity_token: 'P/5hDfgoiBzTmAC9l3oowIntfZY2bY97cIabJvB08B0=',
-      #'search_action[previous_id]' => 3077076,
-      #'search_action[trip_type_id]' => 701925182,
       'search_action[country_from_id]' => @from_country_id,
       'search_action[thing_from_name]' => @from_city,
       'search_action[from_radius_km]' => 0,
@@ -84,12 +81,25 @@ class Drive2dayDe < Search
 
   def date trip
     date_string = trip.xpath('./td[4]').text.match(/[\d\/\.]+/)[0]
-    time_string = trip.xpath('./td[5]').text.strip
+    time_string = trip.xpath('./td[5]').text.match(/[\d]{2}:[\d]{2}(am|pm)/)
+
+    if time_string.nil?
+      time_string = '00:00'
+      time_string = '12:00am' if @locale.get.locale.code != 'de'
+    else
+      time_string = time_string[0]
+    end
 
     date_string = [ date_string, time_string ].join ' '
     #raise date_string.inspect
 
-    DateTime.strptime(date_string, DATE_FORMAT[@locale.get.locale.code])
+    if @locale.get.locale.code == 'de'
+      current_locale = @locale.get.locale.code
+    else
+      current_locale = 'en'
+    end
+
+    DateTime.strptime(date_string, DATE_FORMAT[current_locale])
   end
 
   def result trip
