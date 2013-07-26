@@ -18,6 +18,11 @@ available_countries:
     - germany
   covoituragelibrefr:
     - france
+    - belgium
+  mifazde:
+    - germany
+  drive2dayde:
+    - germany
 
 countries:
   - code: fr

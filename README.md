@@ -13,3 +13,4 @@ The currently supported services are:
 - fahrgemeinschaft.de
 - mifaz.de
 - mitfahrzentrale.de (currently broken)
+- drive2day.de / mitfahren.de
