@@ -28,6 +28,10 @@ class Search
 
     VARIABLES.each do |variable|
       return false unless instance_variable_get "@#{variable}"
+      
+      if not instance_variable_get("@#{variable}").is_a?(Date) and instance_variable_get("@#{variable}").empty?
+        return false
+      end
     end
 
     begin

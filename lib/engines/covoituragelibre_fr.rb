@@ -68,7 +68,7 @@ class CovoituragelibreFr < Search
 
   def date trip
     date_string, time_string = trip.css('td[width="450"] p.gros2').text.strip.split(' - ')
-    date_string = date_string.scan(/[0-9]{2}\s[a-zA-Z]+\s[0-9]{4}/i).first
+    date_string = date_string.scan(/[0-9]{2}\s[[:alpha:]]+\s[0-9]{4}/i).first
 
     day, month, year = date_string.split ' '
     month = Date.month_to_english month

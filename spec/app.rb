@@ -54,6 +54,13 @@ describe "Metacarpooling App" do
     last_response.body.should be_empty
   end
 
+  it "Should return not found when destination is empty" do
+    @query[:search][:to][:city] = ''
+
+    get '/en/', @query
+    last_response.body.should be_empty
+  end
+
   it "should returns results with today's date" do
     @query[:search][:when][:date] = Date.today.strftime '%d-%m-%Y'
 
