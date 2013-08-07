@@ -2,6 +2,7 @@ countries:
   france: France
   germany: Allemagne
   belgium: Belgique
+  netherlands: Pays-Bas
 
 meta:
   description: Search & compare carpooling

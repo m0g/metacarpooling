@@ -84,9 +84,10 @@
       var select = $('#from-country option, #to-country option').filter(this.preSelectCountry);
       console.log(select);
 
-      if (select.length > 0)
+      if (select.length > 0) {
         select.prop('selected', true);
-      else
+        $('#from-city, #to-city').data('countrycode', $('html').attr('lang'));
+      } else
         this.disableCityInputs();
 
       $("#when-date").datepicker({ dateFormat: "dd-mm-yy" });
