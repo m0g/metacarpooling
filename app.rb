@@ -119,8 +119,6 @@ get '/:locale/' do
   unless params.has_key? 'search'
     erb :index
   else
-    #raise Drive2dayDe.new(params[:search]).process.inspect
-
     super_search = SuperSearch.new params[:search]
 
     if super_search.validate_fields

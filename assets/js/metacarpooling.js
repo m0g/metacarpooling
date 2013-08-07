@@ -58,6 +58,10 @@
       textInput.data('countrycode', countryCode);
     },
 
+    preSelectCountry: function() {
+      return $(this).data('countrycode') == $('html').attr('lang')
+    },
+
     events: function() {
       $('#from-city, #to-city').autocomplete({
         source: Form.autocompleteSource,
@@ -77,6 +81,9 @@
     init: function() {
       this.events();
       this.disableCityInputs();
+
+      $('#from-country option, #to-country option').filter(this.preSelectCountry)
+                                                   .prop('selected', true);
       $("#when-date").datepicker({ dateFormat: "dd-mm-yy" });
     }
 
