@@ -102,7 +102,7 @@ describe "Metacarpooling App" do
 
     blablacar_exists = false
     Nokogiri::HTML(last_response.body).css('span.service').each do |line|
-      blablacar_exists = true if line.text.strip == 'blablacar.com'
+      blablacar_exists = true if line.text.downcase.strip == 'blablacar.com'
     end
 
     blablacar_exists.should be_true

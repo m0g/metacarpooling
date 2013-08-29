@@ -89,6 +89,9 @@ engines:
   mitfahrgelegenheit: mitfahrgelegenheit.de
   covoituragefr: blablacar.de
   drive2dayde: drive2day.de
+  blablacar: blablacar.de
+  uri:
+    blablacar: mitfahrgelegenheiten-angebote
 
 other:
   trip: fahrt

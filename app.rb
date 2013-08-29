@@ -14,6 +14,7 @@ require 'rdiscount'
 require 'pony'
 require 'sinatra/base'
 require 'sinatra/assetpack'
+require 'rest_client'
 
 # Core
 require_relative 'lib/result.rb'
@@ -36,6 +37,7 @@ require_relative 'lib/engines/fahrgemeinschaft_de.rb'
 require_relative 'lib/engines/covoituragelibre_fr.rb'
 require_relative 'lib/engines/mifaz_de.rb'
 require_relative 'lib/engines/drive2day_de.rb'
+require_relative 'lib/engines/blablacar.rb'
 
 class Metacarpooling < Sinatra::Base
   set :root, File.dirname(__FILE__)

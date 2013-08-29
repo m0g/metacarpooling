@@ -15,10 +15,9 @@ gem 'pony'
 gem 'sinatra-assetpack', '~> 0.2.2'
 gem 'rake'
 gem 'uglifier'
-#gem 'tor'
-#gem 'tor_requests', git: 'git@github.com:brunogh/tor_requests.git'
 gem 'socksify'
 
+gem 'rest-client'
 
 group :development do
   gem 'dandelion'

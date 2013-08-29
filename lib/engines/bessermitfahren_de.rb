@@ -20,16 +20,14 @@ class BessermitfahrenDe < Search
   end
 
   def post_params
-    params = {
+    {
       from: @from_city_id,
       to: @to_city_id,
       tmp_from: @from_city,
       tmp_to: @to_city,
-      people: 1,
+      #people: 1,
       date: @when_date.strftime('%d.%m.%Y')
     }
-
-    params
   end
 
   def link trip
@@ -77,10 +75,19 @@ class BessermitfahrenDe < Search
 
     return nil if @from_city_id.nil? or @to_city_id.nil?
 
-    uri = URI('http://www.bessermitfahren.de/')
-    res = Net::HTTP.post_form(uri, post_params)
+    http = Net::HTTP.new "www.bessermitfahren.de"
+    http.use_ssl = false
+
+    res_get = http.request(Net::HTTP::Get.new('/'))
+    cookie = res_get.response['set-cookie']
+
+    request = Net::HTTP::Post.new '/'
+    request.set_form_data post_params
+    request["Cookie"] = cookie
+
+    res = http.request(request)
+
     redirection = res.header['location']
-    cookie = res.response['set-cookie'].split('; ')[0]
 
     html = Nokogiri::HTML(open(redirection, "Cookie" => cookie))
     html.css('#resultlist li a').map do |trip|

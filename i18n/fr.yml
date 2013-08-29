@@ -88,6 +88,9 @@ engines:
   mitfahrgelegenheit: carpooling.fr
   covoituragefr: covoiturage.fr
   drive2dayde: drive2day.com
+  blablacar: blablacar.com
+  uri:
+    blablacar: search-car-sharing-result
 
 other:
   trip: trajet

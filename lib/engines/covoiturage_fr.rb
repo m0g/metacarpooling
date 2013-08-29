@@ -136,6 +136,7 @@ class CovoiturageFr < Search
   end
 
   def process
+    return nil if @locale.get.locale.code != 'fr'
     return nil unless cities_exist?
 
     html = Nokogiri::HTML(open(query))
