@@ -75,6 +75,8 @@ date:
     december: Dezember
 
 errors:
+  form_invalid: Bilden ungültig
+  not_found: Kein Ergebnis gefunden
   name:
     empty: Name kannt nicht leer sein
   email:

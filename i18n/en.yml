@@ -76,6 +76,8 @@ date:
     december: December
 
 errors:
+  form_invalid: Form invalid
+  not_found: No result found
   name:
     empty: Name can't be empty
   email:

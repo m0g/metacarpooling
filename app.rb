@@ -123,7 +123,7 @@ get '/:locale/' do
   else
     super_search = SuperSearch.new params[:search]
 
-    if super_search.validate_fields
+    if fields = super_search.validate_fields and coordinates = super_search.validate_coordinates
       @results = super_search.process
       erb :results, locals: {
         results: @results,
@@ -131,8 +131,14 @@ get '/:locale/' do
         search: params[:search]
       }
     else
-      flash[:error] = :form_invalid
-      redirect "/#{session[:locale]}/"
+      if coordinates == false
+        flash[:error] = :not_found
+      elsif fields == false
+        flash[:error] = :form_invalid
+      end
+
+      erb :index
+      #redirect "/#{session[:locale]}/"
     end
   end
 end

@@ -30,7 +30,6 @@ class MifazDe < Search
       link: trip['url'],
       date: date(trip),
       price: '?€',
-      #places: '?',
       from: trip['startloc'],
       to: trip['goalloc'],
       booking: false

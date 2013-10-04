@@ -42,23 +42,26 @@ describe "Metacarpooling App" do
     get '/en/', @query
     last_response.should be_ok
 
-    Nokogiri::HTML(last_response.body)
-      .at_css('.not-found')
-      .should be_true
+    error_msg = Nokogiri::HTML(last_response.body).css('div.alert-error span').text
+    error_msg.downcase.should == 'no result found'
   end
 
   it "Should return not found when the date is in the past" do
     @query[:search][:when][:date] = (Date.today - 1).strftime '%d-%m-%Y'
 
     get '/en/', @query
-    last_response.body.should be_empty
+
+    error_msg = Nokogiri::HTML(last_response.body).css('div.alert-error span').text
+    error_msg.downcase.should == 'form invalid'
   end
 
   it "Should return not found when destination is empty" do
     @query[:search][:to][:city] = ''
 
     get '/en/', @query
-    last_response.body.should be_empty
+
+    error_msg = Nokogiri::HTML(last_response.body).css('div.alert-error span').text
+    error_msg.downcase.should == 'form invalid'
   end
 
   it "should returns results with today's date" do

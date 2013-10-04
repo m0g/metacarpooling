@@ -74,6 +74,8 @@ date:
     december: Décembre
 
 errors:
+  form_invalid: Formulaire invalide
+  not_found: Aucun resultat
   name:
     empty: Le nom ne peut être vide
   email:
