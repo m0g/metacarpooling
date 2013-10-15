@@ -4,8 +4,10 @@ available_countries:
     - germany
     - belgium
     - poland
+    - netherlands
   bessermitfahrende:
     - germany
+    - netherlands
   mitfahrgelegenheitde:
     - france
     - germany
@@ -16,6 +18,7 @@ available_countries:
     - germany
   fahrgemeinschaftde:
     - germany
+    - netherlands
   covoituragelibrefr:
     - france
     - belgium
@@ -23,6 +26,13 @@ available_countries:
     - germany
   drive2dayde:
     - germany
+    - netherlands
+  blablacar:
+    - france
+    - germany
+    - belgium
+    - poland
+    - netherlands
 
 countries:
   - code: fr
@@ -31,6 +41,10 @@ countries:
     name: germany
   - code: be
     name: belgium
+  - code: nl
+    name: netherlands
+  - code: at
+    name: austria
 
 recaptcha:
   public_key: YOUR PUBLIC KEY
