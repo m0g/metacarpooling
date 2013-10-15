@@ -11,4 +11,5 @@ exclude:
     - dandelion.yml
     - production.yml
     - .rvmrc
+    - .ruby-version
 revision_file: .revision
